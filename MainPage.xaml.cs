@@ -22,6 +22,11 @@ namespace AppSDEM
             //BuildLocalizedApplicationBar();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         // Codice di esempio per la realizzazione di una ApplicationBar localizzata
         //private void BuildLocalizedApplicationBar()
         //{
