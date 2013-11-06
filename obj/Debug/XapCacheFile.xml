@@ -1,12 +1,18 @@
-﻿<xapCache source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Bin\Debug\AppSDEM_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="06/11/2013 10.15.33">
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\obj\Debug\AppSDEM.dll" archivePath="AppSDEM.dll" lastWriteTime="06/11/2013 10.15.30" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="06/11/2013 10.14.57" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Assets\Tiles\FlipCycleTileLarge.png" archivePath="Assets\Tiles\FlipCycleTileLarge.png" lastWriteTime="06/11/2013 10.14.57" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Assets\Tiles\FlipCycleTileSmall.png" archivePath="Assets\Tiles\FlipCycleTileSmall.png" lastWriteTime="06/11/2013 10.14.57" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="06/11/2013 10.14.57" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="06/11/2013 10.14.57" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="06/11/2013 10.15.30" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Bin\Debug\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="06/11/2013 10.14.57" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="06/11/2013 10.14.57" />
-  <file source="c:\users\davide\documents\visual studio 2012\Projects\AppSDEM\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="06/11/2013 10.15.33" />
+﻿<xapCache source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\AppSDEM_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="06/11/2013 13.58.05">
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\obj\Debug\AppSDEM.dll" archivePath="AppSDEM.dll" lastWriteTime="06/11/2013 13.56.51" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="06/11/2013 10.14.57" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Assets\Tiles\FlipCycleTileLarge.png" archivePath="Assets\Tiles\FlipCycleTileLarge.png" lastWriteTime="06/11/2013 10.14.57" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Assets\Tiles\FlipCycleTileSmall.png" archivePath="Assets\Tiles\FlipCycleTileSmall.png" lastWriteTime="06/11/2013 10.14.57" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="06/11/2013 10.14.57" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="06/11/2013 10.14.57" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="06/11/2013 13.48.11" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="06/11/2013 13.48.11" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png" archivePath="Assets\Tiles\FlipCycleTileLarge.png" lastWriteTime="06/11/2013 13.48.11" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="06/11/2013 13.48.11" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\Assets\Tiles\FlipCycleTileSmall.png" archivePath="Assets\Tiles\FlipCycleTileSmall.png" lastWriteTime="06/11/2013 13.48.11" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\Assets\Tiles\IconicTileMediumLarge.png" archivePath="Assets\Tiles\IconicTileMediumLarge.png" lastWriteTime="06/11/2013 13.48.11" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\Assets\Tiles\IconicTileSmall.png" archivePath="Assets\Tiles\IconicTileSmall.png" lastWriteTime="06/11/2013 13.48.11" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="06/11/2013 10.14.57" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="06/11/2013 10.14.57" />
+  <file source="C:\Users\Davide\Documents\Visual Studio 2012\Projects\AppSDEM\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="06/11/2013 13.58.05" />
 </xapCache>
