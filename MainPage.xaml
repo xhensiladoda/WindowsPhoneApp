@@ -41,45 +41,35 @@
 
         <!--TitlePanel contiene il nome dell'applicazione e il titolo della pagina-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="APP LOCALIZZAZIONE" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Margin="12,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Height="92">
-            	<Run Text="Benvenuto"/>
-            	<Run Text="!"/>
-            </TextBlock>
+            <TextBlock Text="Geolocation App" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" Foreground="#FFBD9922"/>
+            <TextBlock Margin="12,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Height="92" Text="Welcome!" Foreground="#FFC1611E"/>
             <Border BorderBrush="Black" BorderThickness="1" Height="9"/>
+            <TextBlock TextWrapping="Wrap" Foreground="#FFBD9922">
+            	<Run Text="This is an application of geolocation."/>
+            	<LineBreak/>
+            	<Run Text="Search can be done through the map or you can take a picture by the camera and then use it for searching."/>
+            </TextBlock>
         </StackPanel>
 
         <!--ContentPanel - inserire ulteriore contenuto qui-->
-        <Grid x:Name="ContentPanel" Margin="24,138,0,28" ShowGridLines="True" Grid.RowSpan="2">
+        <Grid x:Name="ContentPanel" Margin="14,245,10,-79" ShowGridLines="True" Grid.RowSpan="2">
             <Grid.Background>
                 <ImageBrush Stretch="Fill"/>
             </Grid.Background>
-            <Grid Margin="85,30,77,307">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0*"/>
-                    <ColumnDefinition Width="43*"/>
-                    <ColumnDefinition Width="6*"/>
-                </Grid.ColumnDefinitions>
-                <HyperlinkButton Content="" HorizontalAlignment="Center" Margin="-14.778,7.376,-13.398,-10.543" VerticalAlignment="Top" RenderTransformOrigin="0.496,0.477" UseLayoutRounding="False" Width="322.176" d:LayoutRounding="Auto" Height="268.167" Foreground="#FF0A0202" Grid.ColumnSpan="3" NavigateUri="/MapPage.xaml">
-                    <HyperlinkButton.OpacityMask>
-                        <ImageBrush Stretch="Fill"/>
-                    </HyperlinkButton.OpacityMask>
-                    <HyperlinkButton.RenderTransform>
-                        <CompositeTransform Rotation="-0.79" TranslateX="-0.033" TranslateY="0.008"/>
-                    </HyperlinkButton.RenderTransform>
-                    <HyperlinkButton.Background>
-                        <ImageBrush ImageSource="map.png" Stretch="Uniform"/>
-                    </HyperlinkButton.Background>
-                </HyperlinkButton>
-            </Grid>
-            <HyperlinkButton HorizontalAlignment="Left" Margin="85,389,0,0" VerticalAlignment="Top" Height="213" Width="266">
+            <HyperlinkButton HorizontalAlignment="Left" Margin="121,303,0,0" VerticalAlignment="Top" Height="181" Width="211">
                 <HyperlinkButton.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="camera-icon (4).png"/>
+                    <ImageBrush Stretch="Uniform" ImageSource="niepce_s_camera_obscura_iphoto.png"/>
                 </HyperlinkButton.Background>
                 <ToggleButton Content="ToggleButton" Height="2" Width="29"/>
             </HyperlinkButton>
-            <TextBlock HorizontalAlignment="Left" Margin="268,250,0,0" TextWrapping="Wrap" Text="MAP" VerticalAlignment="Top" RenderTransformOrigin="0.738,0.241"/>
-            <TextBlock HorizontalAlignment="Left" Margin="179,565,0,0" TextWrapping="Wrap" Text="CAMERA" VerticalAlignment="Top" RenderTransformOrigin="-0.635,-0.444"/>
+            <HyperlinkButton HorizontalAlignment="Left" Margin="121,67,0,0" VerticalAlignment="Top" Height="181" Width="211">
+            	<HyperlinkButton.Background>
+            		<ImageBrush Stretch="Uniform" ImageSource="recherche_internet.png"/>
+            	</HyperlinkButton.Background>
+            	<ToggleButton Content="ToggleButton" Height="2" Width="29"/>
+            </HyperlinkButton>
+            <TextBlock HorizontalAlignment="Left" Margin="217,456,0,0" TextWrapping="Wrap" Text="CAMERA" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FFBD9922"/>
+            <TextBlock HorizontalAlignment="Left" Margin="256,133,0,0" TextWrapping="Wrap" Text="MAP" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FF514211"/>
         </Grid>
 
         <!--Rimuovere il commento per vedere la griglia di allineamento che consenta di verificare che i controlli siano
