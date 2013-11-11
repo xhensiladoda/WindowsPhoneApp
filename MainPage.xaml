@@ -62,7 +62,7 @@
                 </HyperlinkButton.Background>
                 <ToggleButton Content="ToggleButton" Height="2" Width="29"/>
             </HyperlinkButton>
-            <HyperlinkButton HorizontalAlignment="Left" Margin="121,67,0,0" VerticalAlignment="Top" Height="181" Width="211">
+            <HyperlinkButton HorizontalAlignment="Left" Margin="121,67,0,0" VerticalAlignment="Top" Height="181" Width="211" NavigateUri="/MapPage.xaml">
             	<HyperlinkButton.Background>
             		<ImageBrush Stretch="Uniform" ImageSource="recherche_internet.png"/>
             	</HyperlinkButton.Background>
