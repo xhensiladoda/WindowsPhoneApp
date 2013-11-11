@@ -18,12 +18,17 @@ using AppSDEM.Resources;
 
 namespace AppSDEM
 {
+    /** This controller provides the Map functionality of the App.
+     * This is the controller for the Map page of the App.
+     * By default the Map is centered on the device current location.
+     */
     public partial class MapPage : PhoneApplicationPage
     {
+        /** Base zomm level. */
         const int BASE_ZOOMLEVEL = 10;
-        const int MIN_ZOOMLEVEL_FOR_LANDMARKS = 16;
-
+        /** Coordinates of current location. */
         GeoCoordinate currentLocation = null;
+        /** Layer for display current location on the Map. */
         MapLayer locationLayer = null;
 
         public MapPage()
@@ -37,6 +42,7 @@ namespace AppSDEM
             InitLocation ();
         }
 
+        /** Asyncronus call to initialize the location layer. */
         private async void InitLocation()
         {
             // Get current location
@@ -47,6 +53,7 @@ namespace AppSDEM
             ShowLocation();
         }
 
+        /** Asyncronus call to get the current location coordinates. */
         private async Task GetLocation()
         {
             // Get current location.
@@ -56,6 +63,7 @@ namespace AppSDEM
             currentLocation = CoordinateConverter.ConvertGeocoordinate(myGeocoordinate);
         }
 
+        /** Paints a circle on the location layer to display the current location of the device. */
         private void ShowLocation()
         {
             // Create a small circle to mark the current location.
@@ -80,6 +88,7 @@ namespace AppSDEM
 
         }
 
+        /** Centers on the current location. */
         private void CenterMapOnLocation()
         {
             poiMap.Center = currentLocation;
@@ -93,7 +102,7 @@ namespace AppSDEM
         }
         #endregion
 
-        // Create the localized ApplicationBar.
+        /** Creates the application bar with its buttons and sets the events handlers. */
         private void BuildLocalizedApplicationBar()
         {
             // Set the page's ApplicationBar to a new instance of ApplicationBar.
