@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using sdkMapControlWP8CS;
 using System.Threading.Tasks;
+using AppSDEM.Resources;
 
 namespace AppSDEM
 {
@@ -30,6 +31,8 @@ namespace AppSDEM
             InitializeComponent();
             // Set default zoom level
             poiMap.ZoomLevel = BASE_ZOOMLEVEL;
+            // Create the localized ApplicationBar.
+            BuildLocalizedApplicationBar();
             // Get current location and center on map
             InitLocation ();
         }
@@ -80,6 +83,35 @@ namespace AppSDEM
         private void CenterMapOnLocation()
         {
             poiMap.Center = currentLocation;
+        }
+
+        #region Event handlers for App Bar buttons and menu items
+        void ToggleLocation(object sender, EventArgs e)
+        {
+            ShowLocation();
+            CenterMapOnLocation();
+        }
+        #endregion
+
+        // Create the localized ApplicationBar.
+        private void BuildLocalizedApplicationBar()
+        {
+            // Set the page's ApplicationBar to a new instance of ApplicationBar.
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Opacity = 0.5;
+
+            // Create buttons with localized strings from AppResources
+            // Toggle Location button.
+            ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/landmarks.png", UriKind.Relative));
+            appBarButton.Text = AppResources.AppBarToggleLocationBT;
+            appBarButton.Click += ToggleLocation;
+            ApplicationBar.Buttons.Add(appBarButton);
+
+            // Create menu items with localized strings from AppResources.
+            // Toggle Location menu item.
+            ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarToggleLocationMIT);
+            appBarMenuItem.Click += ToggleLocation;
+            ApplicationBar.MenuItems.Add(appBarMenuItem);
         }
     }
 }
