@@ -20,13 +20,30 @@ namespace AppSDEM
         const string apiVer = @"1/";
 
         /**
-         * Crea un WebClient che accetta risultati di tipo <code>application/json</code>
+         * Utility che crea un WebClient che accetta risultati di tipo <code>application/json</code>
          */
-        static WebClient createClient()
+        private static WebClient createClient()
         {
             WebClient wc = new WebClient();
             wc.Headers["Accept"] = "application/json";
             return wc;
+        }
+
+        /**
+         * Utility per ottenere in maniera asincrona i risultati delle chiamate alle WebAPI
+         * tramite un oggetto <code>TaskCompletionSource</code>
+         */
+        private static void asyncResponseReceive(object sender, DownloadStringCompletedEventArgs e)
+        {
+            var tcs = e.UserState as TaskCompletionSource<string>;
+            if (e.Error == null)
+            {
+                tcs.SetResult(e.Result);
+            }
+            else
+            {
+                tcs.SetException(e.Error);
+            }
         }
 
         /**
@@ -41,19 +58,8 @@ namespace AppSDEM
             // url da chiamare
             string url = apiUrl + apiVer + "login?device_id=" + devId + "&mail=" + mail + "&password=" + password;
             var tcs = new TaskCompletionSource<string>();
-            wc.DownloadStringCompleted += (s, e) =>
-            {
-                if (e.Error == null)
-                {
-                    tcs.SetResult(e.Result);
-                }
-                else
-                {
-                    tcs.SetException(e.Error);
-                }
-            };
-            wc.DownloadStringAsync(new Uri(url));
-
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
             string result = await tcs.Task;
             return result;
         }
@@ -70,18 +76,8 @@ namespace AppSDEM
             // url da chiamare
             string url = apiUrl + apiVer + "poi_update?device_id=" + devId + "&incremental=" +incremental;
             var tcs = new TaskCompletionSource<string>();
-            wc.DownloadStringCompleted += (s, e) =>
-            {
-                if (e.Error == null)
-                {
-                    tcs.SetResult(e.Result);
-                }
-                else
-                {
-                    tcs.SetException(e.Error);
-                }
-            };
-            wc.DownloadStringAsync(new Uri(url));
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
 
             string result = await tcs.Task;
             return result;
