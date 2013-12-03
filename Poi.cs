@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Device.Location;
+using System.Globalization;
 using System.Windows.Input;
 using System.Linq;
 using System.Text;
@@ -73,13 +74,9 @@ namespace AppSDEM
          /** Contatto telefonico del PoI */
         [DataMember]
         public string telephone { get; set; }
-        /** Longitudine del PoI */
         [DataMember]
-        public double longitude { get; set; }
-        /** Latitudine del PoI */
-        [DataMember]
-        public double latitude { get; set; }
-
+        /** Stringa con la posizione del PoI nel formato lat,lon*/
+        public string position { get; set; }
         /** Costruttore vuoto di default */
         public PoI () {}
 
@@ -89,7 +86,12 @@ namespace AppSDEM
          */
         public GeoCoordinate GetCoordinate()
         {
-            return new GeoCoordinate(latitude, longitude);
+            // estrae le due stringhe con le due posizioni
+            string[] coordinate = position.Split(new char[]{','});
+            // converte le singole stringe in float
+            float latitute = float.Parse(coordinate[0], CultureInfo.InvariantCulture);
+            float longitude = float.Parse(coordinate[1], CultureInfo.InvariantCulture);
+            return new GeoCoordinate(latitute, longitude);
         }
 
         /**

@@ -14,10 +14,15 @@ namespace AppSDEM
      */
     static class WebAPI
     {
-        /** URL del server */
-        const string apiUrl = @"http://jupiter.ing.unimo.it/rest/";
+        /** Indirizzo web del server */
+        const string SERVER = @"http://jupiter.ing.unimo.it";
+        /** URI rest API */
+        const string API = @"/rest/";
         /** versione delle API */
-        const string apiVer = @"1/";
+        const string API_VER = @"1/";
+		// TODO: inserire l'indirizzo effettivo per il login
+        /** URI dell'API di login */
+        const string LOGIN_API = @"/media24/login";
 
         /**
          * Utility che crea un WebClient che accetta risultati di tipo <code>application/json</code>
@@ -56,7 +61,7 @@ namespace AppSDEM
         {
             WebClient wc = WebAPI.createClient();
             // url da chiamare
-            string url = apiUrl + apiVer + "login?device_id=" + devId + "&mail=" + mail + "&password=" + password;
+            string url = SERVER + LOGIN_API + "?device_id=" + devId + "&mail=" + mail + "&password=" + password;
             var tcs = new TaskCompletionSource<string>();
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
             wc.DownloadStringAsync(new Uri(url), tcs);
@@ -74,7 +79,7 @@ namespace AppSDEM
         {
             WebClient wc = WebAPI.createClient();
             // url da chiamare
-            string url = apiUrl + apiVer + "poi_update?device_id=" + devId + "&incremental=" +incremental;
+            string url = SERVER + API + API_VER + "poi_update?device_id=" + devId + "&incremental=" + incremental;
             var tcs = new TaskCompletionSource<string>();
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
             wc.DownloadStringAsync(new Uri(url), tcs);
@@ -82,5 +87,7 @@ namespace AppSDEM
             string result = await tcs.Task;
             return result;
         }
+
+		// TODO: implementare le altre web API
     }
 }
