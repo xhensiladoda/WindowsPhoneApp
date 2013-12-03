@@ -20,9 +20,8 @@ namespace AppSDEM
         const string API = @"/rest/";
         /** versione delle API */
         const string API_VER = @"1/";
-		// TODO: inserire l'indirizzo effettivo per il login
         /** URI dell'API di login */
-        const string LOGIN_API = @"/media24/login";
+        const string LOGIN_API = @"/24media/rest/login/";
 
         /**
          * Utility che crea un WebClient che accetta risultati di tipo <code>application/json</code>
