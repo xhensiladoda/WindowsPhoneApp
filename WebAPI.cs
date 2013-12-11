@@ -82,10 +82,83 @@ namespace AppSDEM
             var tcs = new TaskCompletionSource<string>();
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
             wc.DownloadStringAsync(new Uri(url), tcs);
-
             string result = await tcs.Task;
             return result;
         }
+
+        /**
+       * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_details
+       * @param devId: device id
+       * @param poi_id: id del poi di cui si vuole restituire il dettaglio
+       */
+        public static async Task<string> poi_details(string devId, string poiId)
+        {
+            WebClient wc = WebAPI.createClient();
+            // url da chiamare
+            string url = SERVER + API + API_VER + "poi_details?device_id=" + devId + "&poi_id=" + poiId;
+            var tcs = new TaskCompletionSource<string>();
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
+            string result = await tcs.Task;
+            return result;
+        }
+
+        /**
+      * Chiama in maniera asincrona il server e restituisce il risultato della funzione get_nearby
+      * @param devId: device id
+      * @param user_id: user id
+      * @param latitude: latitudine di dove ti trovi
+      * @param longitude: longitudine di dove ti trovi
+      * @param radius: raggio di ricerca dei poi da dove ti trovi (massimo 10 poi)
+      */
+
+        public static async Task<string> get_nearby(string devId, string userId, float latitude, float longitude, float radius)
+        {
+            WebClient wc = WebAPI.createClient();
+            // url da chiamare
+            string url = SERVER + API + API_VER + "get_nearby?device_id=" + devId + "&user_id=" + userId + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=" + radius;
+            var tcs = new TaskCompletionSource<string>();
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
+            string result = await tcs.Task;
+            return result;
+        }
+
+
+        /**
+        * Chiama in maniera asincrona il server e restituisce il risultato della funzione categories_update
+        * @param devId: device id
+        * @param incremental: <code>True</code> per le informazioni solo sulle categorie aggiunte recentemente, 
+        * <code>False</code> per le informazioni su tutte le categorie
+        */
+        public static async Task<string> categories_update(string devId, bool incremental)
+        {
+            WebClient wc = WebAPI.createClient();
+            // url da chiamare
+            string url = SERVER + API + API_VER + "categories_update?device_id=" + devId + "&incremental=" + incremental;
+            var tcs = new TaskCompletionSource<string>();
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
+            string result = await tcs.Task;
+            return result;
+        }
+
+        /**
+        * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_ids
+        * @param devId: device id
+        */
+        public static async Task<string> poi_ids(string devId)
+        {
+            WebClient wc = WebAPI.createClient();
+            // url da chiamare
+            string url = SERVER + API + API_VER + "poi_ids?device_id=" + devId;
+            var tcs = new TaskCompletionSource<string>();
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
+            string result = await tcs.Task;
+            return result;
+        }
+
 
 		// TODO: implementare le altre web API
     }

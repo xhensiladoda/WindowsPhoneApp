@@ -27,6 +27,11 @@ namespace AppSDEM
 
         }
 
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Test2.NavigateUri = new Uri("/Test.xaml", UriKind.Relative);
+        }
+
         // Codice di esempio per la realizzazione di una ApplicationBar localizzata
         //private void BuildLocalizedApplicationBar()
         //{

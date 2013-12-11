@@ -70,6 +70,7 @@
             </HyperlinkButton>
             <TextBlock HorizontalAlignment="Left" Margin="217,456,0,0" TextWrapping="Wrap" Text="CAMERA" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FFBD9922"/>
             <TextBlock HorizontalAlignment="Left" Margin="256,133,0,0" TextWrapping="Wrap" Text="MAP" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FF514211"/>
+            <HyperlinkButton Name="Test2" Content="Test" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
         </Grid>
 
         <!--Rimuovere il commento per vedere la griglia di allineamento che consenta di verificare che i controlli siano

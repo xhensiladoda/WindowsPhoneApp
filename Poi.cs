@@ -27,6 +27,7 @@ namespace AppSDEM
         /** Identificatore della  categoria */
         [DataMember]
         public int id_category { get; set; }
+        /** Identificativo dell'admin */
         [DataMember]
         public string admin_id { get; set; }
         /** Data di creazione del PoI */
@@ -74,8 +75,8 @@ namespace AppSDEM
          /** Contatto telefonico del PoI */
         [DataMember]
         public string telephone { get; set; }
-        [DataMember]
-        /** Stringa con la posizione del PoI nel formato lat,lon*/
+        /** Stringa con la posizione del PoI nel formato lat,lon */
+        [DataMember] 
         public string position { get; set; }
         /** Costruttore vuoto di default */
         public PoI () {}
