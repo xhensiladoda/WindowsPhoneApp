@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using System.Device.Location;
 using System.Globalization;
 using System.Windows.Input;
@@ -117,39 +118,17 @@ namespace AppSDEM
             new Uri(url, UriKind.RelativeOrAbsolute));
             return image;
         }
-    }
 
-    class PoIPushpin
-    {
-        public PoI poi { get; private set; }
-        public Pushpin pin { get; private set; }
-
-        public PoIPushpin(PoI thePoI)
+        public Pushpin BuildPushpin()
         {
-            poi = thePoI;
-            pin = new Pushpin();
-            pin.GeoCoordinate = poi.GetCoordinate();
-            GetShortDetail(this, null);
-        }
-
-
-        private void GetLongDetail(object sender, GestureEventArgs e)
-        {
-            pin.Tap -= GetLongDetail;
-            pin.Tap += GetShortDetail;
-            Panel content = new StackPanel();
-            content.Children.Add(poi.GetThumbImage());
-            TextBlock text = new TextBlock();
-            text.Text = poi.long_description;
-            content.Children.Add(text);
-            pin.Content = content;
-        }
-
-        private void GetShortDetail(object sender, GestureEventArgs e)
-        {
-            pin.Tap -= GetShortDetail;
-            pin.Tap += GetLongDetail;
-            pin.Content = poi.short_description;
+            Pushpin pin = new Pushpin();
+            pin.GeoCoordinate = GetCoordinate();
+            HyperlinkButton button = new HyperlinkButton();
+            button.Content = short_description;
+            string qString = "poi_id=" + idpoi;
+            button.NavigateUri = new Uri("/DetailPage.xaml?" + qString, UriKind.Relative);
+            pin.Content = button;
+            return pin;
         }
     }
 }

@@ -86,10 +86,10 @@ namespace AppSDEM
                 poiLayer = new MapLayer();
                 foreach(PoI poi in poiList)
                 {
-                    PoIPushpin pushpin = new PoIPushpin(poi);
+                    Pushpin pushpin = poi.BuildPushpin();
                     MapOverlay myOverlay = new MapOverlay();
-                    myOverlay.Content = pushpin.pin;
-                    myOverlay.GeoCoordinate = pushpin.pin.GeoCoordinate;
+                    myOverlay.Content = pushpin;
+                    myOverlay.GeoCoordinate = poi.GetCoordinate();
                     poiLayer.Add(myOverlay);
                 }
                 poiMap.Layers.Add(poiLayer);
