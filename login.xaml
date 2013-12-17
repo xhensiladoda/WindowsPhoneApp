@@ -28,8 +28,8 @@
                 <RowDefinition Height="671*"/>
                 <RowDefinition Height="52*"/>
             </Grid.RowDefinitions>
-            <TextBox HorizontalAlignment="Left" Height="75" Margin="79,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" Foreground="#FF0E0D07" Background="#BFE4CC79" SelectionForeground="#FF170F0F"/>
-            <TextBox HorizontalAlignment="Left" Height="75" Margin="79,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" Background="#BFE4CC79" Foreground="#FF0E0D07"/>
+            <TextBox Name="user" HorizontalAlignment="Left" Height="75" Margin="79,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" Foreground="#FF0E0D07" Background="#BFE4CC79" SelectionForeground="#FF170F0F"/>
+            <TextBox Name="pass" HorizontalAlignment="Left" Height="75" Margin="79,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" Background="#BFE4CC79" Foreground="#FF0E0D07"/>
             <TextBlock HorizontalAlignment="Left" Margin="97,101,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Height="27" Width="89" Foreground="#FFC5A125"/>
             <TextBlock HorizontalAlignment="Left" Margin="97,235,0,0" TextWrapping="Wrap"  Text="Password" VerticalAlignment="Top" Height="27" Width="89" Foreground="#FFC5A125"/>
             <HyperlinkButton Content="Sign In" HorizontalAlignment="Left" Margin="285,355,0,0" VerticalAlignment="Top" Height="55" Click="HyperlinkButton_Click" Width="93" Foreground="#FFC5A125"/>
