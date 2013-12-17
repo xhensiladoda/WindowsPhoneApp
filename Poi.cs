@@ -106,6 +106,15 @@ namespace AppSDEM
         }
 
         /**
+         * Carica l'immagine normale del PoI dal server.
+         * @return: immagine del PoI
+         */
+        public Image GetNormImage()
+        {
+            return GetImage(image);
+        }
+
+        /**
          * Carica l'immagine specificata dal server.
          * @param img: indirizzo relativo dell'immagine nella directory server
          * @return: l'immagine selezionata

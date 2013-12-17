@@ -22,15 +22,36 @@
 
         <!--TitlePanel contiene il nome dell'applicazione e il titolo della pagina-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="APPLICAZIONE" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="titolo" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="shortdescr" Margin="-11.887,-7,-0.119,0" Style="{StaticResource PhoneTextTitle1Style}" Height="206" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
+                <TextBlock.RenderTransform>
+                    <CompositeTransform SkewX="0.341" TranslateX="0.494"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </StackPanel>
 
         <!--ContentPanel - inserire ulteriore contenuto qui-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock x:Name="Left" Margin="159,25,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="11,25,13,-25">
+            <Image x:Name="image" Height="252" VerticalAlignment="Top" Margin="0,-29,0,0"/>
+            <TextBlock x:Name="longdescr" HorizontalAlignment="Left" Margin="10,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="436"/>
+            <TextBlock HorizontalAlignment="Left" Margin="44,291,0,0" TextWrapping="Wrap" Text="Città:" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="5,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+                <Run Text="Provincia"/>
+                <Run Text=":"/>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="48,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+                <Run Text="CAP"/>
+                <Run Text=":"/>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="10,387,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+                <Run Text="Indirizzo"/>
+                <Run Text=":"/>
+            </TextBlock>
+            <TextBlock x:Name="city" HorizontalAlignment="Left" Margin="101,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="355"/>
+            <TextBlock x:Name="province" HorizontalAlignment="Left" Margin="101,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
+            <TextBlock x:Name="zipcode" HorizontalAlignment="Left" Margin="101,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
+            <TextBlock x:Name="address" HorizontalAlignment="Left" Margin="101,387,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
         </Grid>
+        <ProgressBar x:Name="progress" HorizontalAlignment="Left" Height="69" Margin="76,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="324" RenderTransformOrigin="0.485,0.478"/>
     </Grid>
 
 </phone:PhoneApplicationPage>

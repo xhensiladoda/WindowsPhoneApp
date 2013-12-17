@@ -21,14 +21,25 @@ namespace AppSDEM
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            // attiva la proress bar
+            progress.IsIndeterminate = true;
+            // ottiene i dati del PoI
             string poi_id = NavigationContext.QueryString["poi_id"];
-            Left.Text = poi_id;
             string json = await WebAPI.poi_details("2", poi_id);
             List<PoI> poiList = new List<PoI>();
             poiList = Utils.deserializeJSONArray<PoI>(json);
             PoI myPoI = poiList[0];
-            this.titolo.Text = myPoI.city;
-            // TODO: inserire maggiori informazioni sul poi nella pagina
+            // imposta i campi della pagina
+            shortdescr.Text = myPoI.short_description;
+            image.Source = myPoI.GetThumbImage().Source;
+            longdescr.Text = myPoI.long_description;
+            city.Text = myPoI.city;
+            province.Text = myPoI.province;
+            zipcode.Text = myPoI.zipcode;
+            address.Text = myPoI.address;
+            // ferma e nasconde la progress bar
+            progress.IsIndeterminate = false;
+            progress.Visibility = Visibility.Collapsed;
         }
     }
 }
