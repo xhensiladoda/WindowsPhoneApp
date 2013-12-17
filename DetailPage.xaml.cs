@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace AppSDEM
 {
+    /**
+     * Controller della pagina di dettaglio dei PoI.
+     * @author Setti Davide
+     */
     public partial class DetailPage : PhoneApplicationPage
     {
         public DetailPage()
@@ -18,6 +22,11 @@ namespace AppSDEM
             InitializeComponent();
         }
 
+        /**
+         * Funzione che viene al caricamento della pagina di dettaglio
+         * carica i dati del PoI specificato dal parametro <code>poi_id</code>
+         * tramite l'API <code>poi_details</code> e li visualizza nella pagina.
+         */
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);

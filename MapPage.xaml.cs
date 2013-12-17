@@ -18,9 +18,10 @@ using AppSDEM.Resources;
 
 namespace AppSDEM
 {
-    /** This controller provides the Map functionality of the App.
-     * This is the controller for the Map page of the App.
-     * By default the Map is centered on the device current location.
+    /**
+     * Questo controller fornisce le funzionalità della mappa dell'app.
+     * Di default la mappa viene centrata sulla posizione corrente del dispositivo.
+     * @author Setti Davide
      */
     public partial class MapPage : PhoneApplicationPage
     {
@@ -54,6 +55,7 @@ namespace AppSDEM
             // Show dot on location
             ShowLocation();
          }
+
         /**
          * Chiamata asincrona per ottenere la posizione attuale.
          */
@@ -75,14 +77,20 @@ namespace AppSDEM
             marker.Visibility = Visibility.Visible;
         }
 
-
+        /**
+         * Chiamata asincrona per inserire all'interno della mappa i pushpin
+         * dei PoI, ottenuti tramite l'API <code>poi_update</code>.
+         */
         private async void PrintPoi()
         {
+            // chiamata alla webapi
             string json = await WebAPI.poi_update("2", false);
             List<PoI> poiList = new List<PoI>();
+            // recupera la lista dei PoI
             poiList = Utils.deserializeJSONArray<PoI>(json);
             if (poiList.Count != 0)
             {
+                // per ogni poi aggiunge il pushpin alla mappa
                 poiLayer = new MapLayer();
                 foreach(PoI poi in poiList)
                 {

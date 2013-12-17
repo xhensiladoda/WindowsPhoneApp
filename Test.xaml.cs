@@ -19,7 +19,8 @@ namespace AppSDEM
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            string result = await WebAPI.get_nearby("1", "1", 44.63f, 10.95f, 0.2f);
+            string result = await WebAPI.get_nearby("1", "1", 44.63f, 10.95f, 2.2f);
+            //string result = await WebAPI.poi_ids("1");
             Test1.Text = result;
         }
     }

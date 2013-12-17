@@ -16,6 +16,7 @@ namespace AppSDEM
     /**
      * Classe che rappresenta un Point of Interest (PoI) e che ne definisce
      * la sua serializzazione in formato JSON.
+     * @author Setti Davide
      */
     [DataContract]
     class PoI
@@ -128,13 +129,20 @@ namespace AppSDEM
             return image;
         }
 
+        /**
+         * Crea un pushpin con il link alla pagina di dettaglio del PoI
+         * da inserire in una mappa
+         * @return il pushpin del PoI
+         */
         public Pushpin BuildPushpin()
         {
             Pushpin pin = new Pushpin();
             pin.GeoCoordinate = GetCoordinate();
             HyperlinkButton button = new HyperlinkButton();
             button.Content = short_description;
+            // crea la querystring
             string qString = "poi_id=" + idpoi;
+            // imposta la navigazione
             button.NavigateUri = new Uri("/DetailPage.xaml?" + qString, UriKind.Relative);
             pin.Content = button;
             return pin;

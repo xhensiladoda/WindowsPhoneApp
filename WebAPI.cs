@@ -71,7 +71,7 @@ namespace AppSDEM
         /**
          * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_update
          * @param devId: device id
-         * @param incremental: <code>True</code> per le informazioni solo sui POI recenti, <code>False</code> 
+         * @param incremental: <code>True</code> per le informazioni solo sui POI recenti, <code>False</code>
          * per le informazioni su tutti i poi
          */
         public static async Task<string> poi_update(string devId, bool incremental)
@@ -87,10 +87,11 @@ namespace AppSDEM
         }
 
         /**
-       * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_details
-       * @param devId: device id
-       * @param poi_id: id del poi di cui si vuole restituire il dettaglio
-       */
+         * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_details
+         * @param devId: device id
+         * @param poi_id: id del poi di cui si vuole restituire il dettaglio
+         * @author Garutti Francesco
+         */
         public static async Task<string> poi_details(string devId, string poiId)
         {
             WebClient wc = WebAPI.createClient();
@@ -104,19 +105,21 @@ namespace AppSDEM
         }
 
         /**
-      * Chiama in maniera asincrona il server e restituisce il risultato della funzione get_nearby
-      * @param devId: device id
-      * @param user_id: user id
-      * @param latitude: latitudine di dove ti trovi
-      * @param longitude: longitudine di dove ti trovi
-      * @param radius: raggio di ricerca dei poi da dove ti trovi (massimo 10 poi)
-      */
-
+         * Chiama in maniera asincrona il server e restituisce il risultato della funzione get_nearby
+         * @param devId: device id
+         * @param user_id: user id
+         * @param latitude: latitudine di dove ti trovi
+         * @param longitude: longitudine di dove ti trovi
+         * @param radius: raggio di ricerca dei poi da dove ti trovi (massimo 10 poi)
+         * @author Garutti Francesco
+         */
         public static async Task<string> get_nearby(string devId, string userId, float latitude, float longitude, float radius)
         {
             WebClient wc = WebAPI.createClient();
             // url da chiamare
-            string url = SERVER + API + API_VER + "get_nearby?device_id=" + devId + "&user_id=" + userId + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=" + radius;
+            string url = SERVER + API + API_VER + "get_nearby?device_id=" + devId + "&user_id=" + userId
+                + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=" + radius;
+            url = url.Replace(',', '.');
             var tcs = new TaskCompletionSource<string>();
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
             wc.DownloadStringAsync(new Uri(url), tcs);
@@ -126,11 +129,12 @@ namespace AppSDEM
 
 
         /**
-        * Chiama in maniera asincrona il server e restituisce il risultato della funzione categories_update
-        * @param devId: device id
-        * @param incremental: <code>True</code> per le informazioni solo sulle categorie aggiunte recentemente, 
-        * <code>False</code> per le informazioni su tutte le categorie
-        */
+         * Chiama in maniera asincrona il server e restituisce il risultato della funzione categories_update
+         * @param devId: device id
+         * @param incremental: <code>True</code> per le informazioni solo sulle categorie aggiunte recentemente,
+         * <code>False</code> per le informazioni su tutte le categorie
+         * @author Garutti Francesco
+         */
         public static async Task<string> categories_update(string devId, bool incremental)
         {
             WebClient wc = WebAPI.createClient();
@@ -144,9 +148,11 @@ namespace AppSDEM
         }
 
         /**
-        * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_ids
-        * @param devId: device id
-        */
+         * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_ids
+         * TODO: ma esiste ancora?
+         * @param devId: device id
+         * @author Garutti Francesco
+         */
         public static async Task<string> poi_ids(string devId)
         {
             WebClient wc = WebAPI.createClient();
