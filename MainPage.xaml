@@ -76,6 +76,7 @@
             	</HyperlinkButton.Background>
             </HyperlinkButton>
             <TextBlock HorizontalAlignment="Left" Margin="23,67,0,0" TextWrapping="Wrap" Text="LOGIN" VerticalAlignment="Top" FontFamily="AR BLANCA" FontSize="21.333" Foreground="#FFC5A22F"/>
+            <HyperlinkButton Name="Test2" Content="Test" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
         </Grid>
 
         <!--Rimuovere il commento per vedere la griglia di allineamento che consenta di verificare che i controlli siano

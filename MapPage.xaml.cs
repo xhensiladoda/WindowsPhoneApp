@@ -8,11 +8,11 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Maps;
 using Microsoft.Phone.Maps.Controls;
+using Microsoft.Phone.Maps.Toolkit;
 using System.Device.Location; // Provides the GeoCoordinate class.
 using Windows.Devices.Geolocation; //Provides the Geocoordinate class.
 using System.Windows.Shapes;
 using System.Windows.Media;
-using sdkMapControlWP8CS;
 using System.Threading.Tasks;
 using AppSDEM.Resources;
 
@@ -29,7 +29,7 @@ namespace AppSDEM
         /** Coordinates of current location. */
         GeoCoordinate currentLocation = null;
         /** Layer for display current location on the Map. */
-        MapLayer locationLayer = null;
+        MapLayer poiLayer = null;
 
         public MapPage()
         {
@@ -38,59 +38,70 @@ namespace AppSDEM
             poiMap.ZoomLevel = BASE_ZOOMLEVEL;
             // Create the localized ApplicationBar.
             BuildLocalizedApplicationBar();
-            // Get current location and center on map
-            InitLocation ();
+            // Initialize location
+            InitLocation();
+            PrintPoi();
         }
 
-        /** Asyncronus call to initialize the location layer. */
+        /** 
+         * Chiamata asincrona per inizializzare la posizione sulla mappa
+         */
         private async void InitLocation()
         {
-            // Get current location
-            await GetLocation();
             // Center map on location
-            CenterMapOnLocation();
+            await GetLocation();
+            await CenterMapOnLocation();
             // Show dot on location
             ShowLocation();
-        }
-
-        /** Asyncronus call to get the current location coordinates. */
+         }
+        /**
+         * Chiamata asincrona per ottenere la posizione attuale.
+         */
         private async Task GetLocation()
         {
             // Get current location.
             Geolocator myGeolocator = new Geolocator();
             Geoposition myGeoposition = await myGeolocator.GetGeopositionAsync();
-            Geocoordinate myGeocoordinate = myGeoposition.Coordinate;
-            currentLocation = CoordinateConverter.ConvertGeocoordinate(myGeocoordinate);
+            currentLocation = myGeoposition.Coordinate.ToGeoCoordinate();
         }
 
-        /** Paints a circle on the location layer to display the current location of the device. */
+        /**
+         * Visualizza la posizione attuale del dispositivo.
+         */
         private void ShowLocation()
         {
-            // Create a small circle to mark the current location.
-            Ellipse myCircle = new Ellipse();
-            myCircle.Fill = new SolidColorBrush(Colors.Blue);
-            myCircle.Height = 20;
-            myCircle.Width = 20;
-            myCircle.Opacity = 50;
-
-            // Create a MapOverlay to contain the circle.
-            MapOverlay myLocationOverlay = new MapOverlay();
-            myLocationOverlay.Content = myCircle;
-            myLocationOverlay.PositionOrigin = new Point(0.5, 0.5);
-            myLocationOverlay.GeoCoordinate = currentLocation;
-
-            // Create a MapLayer to contain the MapOverlay.
-            locationLayer = new MapLayer();
-            locationLayer.Add(myLocationOverlay);
-
-            // Add the MapLayer to the Map.
-            poiMap.Layers.Add(locationLayer);
-
+            UserLocationMarker marker = (UserLocationMarker)this.FindName("deviceMarker");
+            marker.GeoCoordinate = currentLocation;
+            marker.Visibility = Visibility.Visible;
         }
 
-        /** Centers on the current location. */
-        private void CenterMapOnLocation()
+
+        private async void PrintPoi()
         {
+            string json = await WebAPI.poi_update("2", false);
+            List<PoI> poiList = new List<PoI>();
+            poiList = Utils.deserializeJSONArray<PoI>(json);
+            if (poiList.Count != 0)
+            {
+                poiLayer = new MapLayer();
+                foreach(PoI poi in poiList)
+                {
+                    Pushpin pushpin = poi.BuildPushpin();
+                    MapOverlay myOverlay = new MapOverlay();
+                    myOverlay.Content = pushpin;
+                    myOverlay.GeoCoordinate = poi.GetCoordinate();
+                    poiLayer.Add(myOverlay);
+                }
+                poiMap.Layers.Add(poiLayer);
+            }
+        }
+
+        /**
+         * Centra la mappa sulla pozione attuale del dispositivo.
+         */
+        private async Task CenterMapOnLocation()
+        {
+            await GetLocation();
             poiMap.Center = currentLocation;
         }
 
@@ -102,7 +113,9 @@ namespace AppSDEM
         }
         #endregion
 
-        /** Creates the application bar with its buttons and sets the events handlers. */
+        /**
+         * Crea un'ApplicationBar ed imposta i gestori degli eventi.
+         */
         private void BuildLocalizedApplicationBar()
         {
             // Set the page's ApplicationBar to a new instance of ApplicationBar.

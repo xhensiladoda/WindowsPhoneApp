@@ -1,4 +1,5 @@
 ﻿<phone:PhoneApplicationPage
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -24,8 +25,11 @@
         <!--ContentPanel - inserire ulteriore contenuto qui-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
-            <maps:Map x:Name="poiMap" HorizontalAlignment="Center" VerticalAlignment="Center" Height="768" Width="456"/>
-
+            <maps:Map x:Name="poiMap" HorizontalAlignment="Center" VerticalAlignment="Center" Height="768" Width="456">
+                <toolkit:MapExtensions.Children>
+                    <toolkit:UserLocationMarker x:Name="deviceMarker" Visibility="Collapsed"/>
+                </toolkit:MapExtensions.Children>
+            </maps:Map>
         </Grid>
     </Grid>
 
