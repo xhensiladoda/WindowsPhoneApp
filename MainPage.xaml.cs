@@ -17,9 +17,6 @@ namespace AppSDEM
         public MainPage()
         {
             InitializeComponent();
-
-            // Codice di esempio per localizzare la ApplicationBar
-            //BuildLocalizedApplicationBar();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

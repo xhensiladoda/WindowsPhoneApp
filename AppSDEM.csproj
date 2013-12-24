@@ -100,6 +100,12 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PoISearchPage.xaml.cs">
+      <DependentUpon>PoISearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PoISearchResultsPage.xaml.cs">
+      <DependentUpon>PoISearchResultsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
@@ -137,6 +143,14 @@
     </Page>
     <Page Include="MapPage.xaml">
     </Page>
+    <Page Include="PoISearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PoISearchResultsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,7 +165,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
-    <Content Include="Assets\AppBar\landmarks.png" />
+    <Content Include="Assets\AppBar\centerme.png" />
+    <Content Include="Assets\AppBar\search.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

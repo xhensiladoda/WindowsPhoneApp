@@ -119,6 +119,11 @@ namespace AppSDEM
             ShowLocation();
             CenterMapOnLocation();
         }
+
+        void PoiSearch(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PoISearchPage.xaml", UriKind.Relative));
+        }
         #endregion
 
         /**
@@ -132,16 +137,29 @@ namespace AppSDEM
 
             // Create buttons with localized strings from AppResources
             // Toggle Location button.
-            ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/landmarks.png", UriKind.Relative));
-            appBarButton.Text = AppResources.AppBarToggleLocationBT;
-            appBarButton.Click += ToggleLocation;
-            ApplicationBar.Buttons.Add(appBarButton);
+            ApplicationBarIconButton centermapBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/centerme.png", UriKind.Relative));
+            centermapBarButton.Text = AppResources.AppBarToggleLocationBT;
+            centermapBarButton.Click += ToggleLocation;
+            ApplicationBar.Buttons.Add(centermapBarButton);
+
+            // creazione dell'icona di Search PoI
+            ApplicationBarIconButton searchBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/search.png", UriKind.Relative));
+            searchBarButton.Text = "PoI Search";
+            searchBarButton.Click += PoiSearch;
+            ApplicationBar.Buttons.Add(searchBarButton);
+
 
             // Create menu items with localized strings from AppResources.
             // Toggle Location menu item.
-            ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarToggleLocationMIT);
-            appBarMenuItem.Click += ToggleLocation;
-            ApplicationBar.MenuItems.Add(appBarMenuItem);
+            ApplicationBarMenuItem centermapBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarToggleLocationMIT);
+            centermapBarMenuItem.Click += ToggleLocation;
+            ApplicationBar.MenuItems.Add(centermapBarMenuItem);
+
+            // creazione menu item di Search PoI
+            ApplicationBarMenuItem searchBarMenuItem = new ApplicationBarMenuItem();
+            searchBarMenuItem.Text = "PoI Search";
+            searchBarMenuItem.Click += PoiSearch;
+            ApplicationBar.MenuItems.Add(searchBarMenuItem);
         }
     }
 }

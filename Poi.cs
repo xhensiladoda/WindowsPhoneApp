@@ -130,6 +130,35 @@ namespace AppSDEM
         }
 
         /**
+         * Ottiene l'indirizzo url dell'immagine specificata dal server
+         * @param img: indirizzo relativo dell'immagine nella directory server
+         * @return: url dell'immagine selezionata
+         */ 
+        private string GetUrlImage(string img)
+        {
+            string url = SERVER_IMAGE_URL + img;
+            return url;
+        }
+
+        /**
+         * Ottiene l'url dell'immagine thumbnail del PoI dal server
+         * @return: url del thumbnail del PoI
+         */ 
+        public string GetUrlThumbImage()
+        {
+            return GetUrlImage(thumbnail);
+        }
+
+        /**
+       * Ottiene l'url dell'immagine normale del PoI dal server
+       * @return: url dell'immagine normale del PoI
+       */ 
+        public string GetUrlNormImage()
+        {
+            return GetUrlImage(image);
+        }
+
+        /**
          * Crea un pushpin con il link alla pagina di dettaglio del PoI
          * da inserire in una mappa
          * @return il pushpin del PoI

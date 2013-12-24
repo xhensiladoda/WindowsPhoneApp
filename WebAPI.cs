@@ -149,7 +149,6 @@ namespace AppSDEM
 
         /**
          * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_ids
-         * TODO: ma esiste ancora?
          * @param devId: device id
          * @author Garutti Francesco
          */
@@ -158,6 +157,43 @@ namespace AppSDEM
             WebClient wc = WebAPI.createClient();
             // url da chiamare
             string url = SERVER + API + API_VER + "poi_ids?device_id=" + devId;
+            var tcs = new TaskCompletionSource<string>();
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
+            string result = await tcs.Task;
+            return result;
+        }
+
+
+        /**
+         * Chiama in maniera asincrona il server e restituisce il risultato della funzione poi_search
+         * @param devId: device id
+         * @param latitude: latitudine di dove ti trovi
+         * @param longitude: longitudine di dove ti trovi
+         * @param radius: raggio di ricerca dei poi da dove ti trovi
+         * @param nome: nome del poi
+         * @param categoria: categoria di appartenenza del poi
+         * @param descrizione: descrizione del poi
+         * @param indirizzo: indirizzo del poi
+         * @param città: città del poi
+         * @param provincia: provincia del poi
+         * @param CAP: CAP del poi
+         * @param nazione: nazione del poi
+         * @author Garutti Francesco
+        */
+        public static async Task<string> poi_search(string devId, float latitude, float longitude, 
+            float radius, string name, string category, string description, string address,
+            string city, string province, string zipcode, string country)
+        {
+
+            WebClient wc = WebAPI.createClient();
+            // url da chiamare
+            string url = SERVER + API + API_VER + "poi_search?device_id=" + devId
+                + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=" + radius + "&name=" + name
+                + "&idcategory=" + category + "&long_description=" + description + "&address=" + address
+                + "&city=" + city + "&province=" + province + "&zipcode=" + zipcode + "&country=" + country;
+
+            url = url.Replace(',', '.');
             var tcs = new TaskCompletionSource<string>();
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
             wc.DownloadStringAsync(new Uri(url), tcs);
