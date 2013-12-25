@@ -1,4 +1,5 @@
 ﻿<phone:PhoneApplicationPage
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="AppSDEM.PoISearchPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,6 +13,12 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Name="lpctemplate">
+            <TextBlock Text="{Binding cat}"/>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -32,25 +39,26 @@
             <TextBlock Name="block_longitudine" HorizontalAlignment="Left" Margin="88,208,0,0" TextWrapping="Wrap" Text="Longitudine:" VerticalAlignment="Top" Height="39" Width="112"/>
             <TextBlock Name="block_raggio" HorizontalAlignment="Left" Margin="133,252,0,0" TextWrapping="Wrap" Text="Raggio:" VerticalAlignment="Top" Height="39" Width="67"/>
             <TextBlock Name="block_nome" HorizontalAlignment="Left" Margin="138,296,0,0" TextWrapping="Wrap" Text="Nome:" VerticalAlignment="Top" Height="39" Width="61"/>
-            <TextBlock Name="block_categoria" HorizontalAlignment="Left" Margin="108,340,0,0" TextWrapping="Wrap" Text="Categoria:" VerticalAlignment="Top" Height="39" Width="91"/>
-            <TextBlock Name="block_descrizione" HorizontalAlignment="Left" Margin="94,384,0,0" TextWrapping="Wrap" Text="Descrizione:" VerticalAlignment="Top" Height="39" Width="106"/>
-            <TextBlock Name="block_indirizzo" HorizontalAlignment="Left" Margin="122,428,0,0" TextWrapping="Wrap" Text="Indirizzo:" VerticalAlignment="Top" Height="39" Width="81"/>
-            <TextBlock Name="block_citta" HorizontalAlignment="Left" Margin="157,472,0,0" TextWrapping="Wrap" Text="Città:" VerticalAlignment="Top" Height="39" Width="46"/>
-            <TextBlock Name="block_provincia" HorizontalAlignment="Left" Margin="115,516,0,0" TextWrapping="Wrap" Text="Provincia:" VerticalAlignment="Top" Height="39" Width="84"/>
-            <TextBlock Name="block_cap" HorizontalAlignment="Left" Margin="157,560,0,0" TextWrapping="Wrap" Text="CAP:" VerticalAlignment="Top" Height="39" Width="42"/>
-            <TextBlock Name="block_nazione" HorizontalAlignment="Left" Margin="122,604,0,0" TextWrapping="Wrap" Text="Nazione:" VerticalAlignment="Top" Height="39" Width="78"/>
+            <TextBlock Name="block_categoria" HorizontalAlignment="Left" Margin="108,359,0,0" TextWrapping="Wrap" Text="Categoria:" VerticalAlignment="Top" Height="39" Width="91"/>
+            <TextBlock Name="block_descrizione" HorizontalAlignment="Left" Margin="94,416,0,0" TextWrapping="Wrap" Text="Descrizione:" VerticalAlignment="Top" Height="39" Width="106"/>
+            <TextBlock Name="block_indirizzo" HorizontalAlignment="Left" Margin="122,460,0,0" TextWrapping="Wrap" Text="Indirizzo:" VerticalAlignment="Top" Height="39" Width="81"/>
+            <TextBlock Name="block_citta" HorizontalAlignment="Left" Margin="157,504,0,0" TextWrapping="Wrap" Text="Città:" VerticalAlignment="Top" Height="39" Width="46"/>
+            <TextBlock Name="block_provincia" HorizontalAlignment="Left" Margin="115,548,0,0" TextWrapping="Wrap" Text="Provincia:" VerticalAlignment="Top" Height="39" Width="84"/>
+            <TextBlock Name="block_cap" HorizontalAlignment="Left" Margin="157,592,0,0" TextWrapping="Wrap" Text="CAP:" VerticalAlignment="Top" Height="39" Width="42"/>
+            <TextBlock Name="block_nazione" HorizontalAlignment="Left" Margin="122,636,0,0" TextWrapping="Wrap" Text="Nazione:" VerticalAlignment="Top" Height="39" Width="78"/>
             <TextBox Name="txt_latitudine" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
             <TextBox Name="txt_longitudine" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
             <TextBox Name="txt_raggio" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,232,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
             <TextBox Name="txt_nome" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,276,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
-            <TextBox Name="txt_categoria" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,320,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
-            <TextBox Name="txt_descrizione" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,364,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
-            <TextBox Name="txt_indirizzo" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,408,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
-            <TextBox Name="txt_citta" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,452,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
-            <TextBox Name="txt_provincia" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,496,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
-            <TextBox Name="txt_cap" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,540,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
-            <TextBox Name="txt_nazione" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,584,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
-            <HyperlinkButton Content="Cerca!" HorizontalAlignment="Left" Margin="183,683,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
+            <toolkit:ListPicker Name="listcategoria" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="204,334,0,0" VerticalAlignment="Top" Width="216" ItemTemplate="{Binding lpctemplate}">
+            </toolkit:ListPicker>
+            <TextBox Name="txt_descrizione" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,397,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
+            <TextBox Name="txt_indirizzo" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,441,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
+            <TextBox Name="txt_citta" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,485,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
+            <TextBox Name="txt_provincia" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,529,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
+            <TextBox Name="txt_cap" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,573,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
+            <TextBox Name="txt_nazione" FontSize="20" HorizontalAlignment="Left" Height="64" Margin="199,617,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216"/>
+            <HyperlinkButton Content="Cerca!" HorizontalAlignment="Left" Margin="183,692,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
 
         </Grid>
     </Grid>

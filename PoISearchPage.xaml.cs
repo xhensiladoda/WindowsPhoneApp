@@ -11,17 +11,21 @@ using Microsoft.Phone.Shell;
 
 namespace AppSDEM
 {
-
     /**
      * Controller del form di ricerca dei PoI
      * @author Garutti Francesco
      */
-
     public partial class PoISearchPage : PhoneApplicationPage
     {
+        // elenco delle categorie dei PoI
+        private String[] cat = { "Tutte le categorie", "Generica", "Informatica", "Meccanica", 
+                                   "Università", "Parrucchiere", "Ristorante", "Alimentare" };
+
         public PoISearchPage()
         {
             InitializeComponent();
+            // inizializzo la ListPicker della categoria con le stringhe di <code>cat</code>
+            listcategoria.ItemsSource = cat;
         }
 
         /**
@@ -31,13 +35,19 @@ namespace AppSDEM
          */
         private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-
-            // estraggo i campi dalle textbox del form di ricerca
+            // estraggo i campi dalle textbox del form di ricerca tranne che per
+            // la categoria dove c'è un ListPicker
             String latitudine = txt_latitudine.Text;
             String longitudine = txt_longitudine.Text;
             String raggio = txt_raggio.Text;
             String nome = txt_nome.Text;
-            String categoria = txt_categoria.Text;
+            // estraggo l'indice della categoria dalla lista <code>cat</code>
+            String categoria;
+            if (listcategoria.SelectedIndex == 0)
+                categoria = "";
+            else
+                categoria = listcategoria.SelectedIndex.ToString();
+
             String descrizione = txt_descrizione.Text;
             String indirizzo = txt_indirizzo.Text;
             String citta = txt_citta.Text;
@@ -46,7 +56,6 @@ namespace AppSDEM
             String nazione = txt_nazione.Text;
 
             float latitude, longitude, radius;
-
             // se l'utente non mi fornisce criteri di ricerca in base a latitudine, longitudine
             // e raggio, metto dei valori di default in modo da considerare tutto senza limiti
             if ((latitudine.Equals("")) && (longitudine.Equals("")) && (raggio.Equals("")))
@@ -73,15 +82,10 @@ namespace AppSDEM
             }
 
             // chiamo l'API poi_search per ottenere il risultato della ricerca
-            string result = await WebAPI.poi_search("1", latitude, longitude, radius, 
+            string result = await WebAPI.poi_search("1", latitude, longitude, radius,
                 nome, categoria, descrizione, indirizzo, citta, provincia, cap, nazione);
 
-            
             NavigationService.Navigate(new Uri("/PoISearchResultsPage.xaml?" + result, UriKind.Relative));
-
-
-            //MessageBox.Show(result);
-
         }
     }
 }
