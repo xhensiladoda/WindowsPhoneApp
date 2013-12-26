@@ -94,6 +94,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Categoria.cs" />
     <Compile Include="DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>

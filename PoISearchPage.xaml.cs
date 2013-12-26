@@ -17,15 +17,33 @@ namespace AppSDEM
      */
     public partial class PoISearchPage : PhoneApplicationPage
     {
-        // elenco delle categorie dei PoI
-        private String[] cat = { "Tutte le categorie", "Generica", "Informatica", "Meccanica", 
-                                   "Università", "Parrucchiere", "Ristorante", "Alimentare" };
-
+        /**
+         * funzione per inizializzare la lista delle categorie del ListPicker prese
+         * direttamente dal server tramite l'API <code>categories_update</code>
+         */ 
+        public async void InitListCat()
+        {
+            // effettuo la categories_update e deserializzo il risultato
+            string listajson = await WebAPI.categories_update("1", false);
+            List<Categoria> listacat = new List<Categoria>();
+            listacat = Utils.deserializeJSONArray<Categoria>(listajson);
+            // creo la lista delle categorie da aggiungere al ListPicker
+            List<String> categories = new List<string>();
+            // aggiungo all'inizio il modo per cercare in tutte le categorie di default
+            categories.Add("Tutte le categorie");
+            for (int i = 0; i < listacat.Count; i++)
+            {
+                categories.Add(listacat[i].description);
+            }
+            // pongo la lista ottenuta come ItemSource del ListPicker
+            listcategoria.ItemsSource = categories;
+        }
+        
         public PoISearchPage()
         {
             InitializeComponent();
-            // inizializzo la ListPicker della categoria con le stringhe di <code>cat</code>
-            listcategoria.ItemsSource = cat;
+            // inizializzo la lista delle categoria per la ricerca del ListPicker
+            InitListCat();     
         }
 
         /**
