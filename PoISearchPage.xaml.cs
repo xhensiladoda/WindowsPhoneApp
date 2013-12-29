@@ -21,7 +21,7 @@ namespace AppSDEM
          * funzione per inizializzare la lista delle categorie del ListPicker prese
          * direttamente dal server tramite l'API <code>categories_update</code>
          */ 
-        public async void InitListCat()
+        private async void InitListCat()
         {
             // effettuo la categories_update e deserializzo il risultato
             string listajson = await WebAPI.categories_update("1", false);

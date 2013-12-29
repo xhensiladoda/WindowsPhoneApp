@@ -54,35 +54,46 @@ namespace AppSDEM
                 resultjson = resultjson.Substring(resultjson.IndexOf("?") + 1);
                 List<PoI> idpoiList = new List<PoI>();
                 idpoiList = Utils.deserializeJSONArray<PoI>(resultjson);
-                // inizializzo la <code>listpoitrovat</code> come <code>ObservableCollection</code>
-                // per creare la lista dinamica dei poi trovati
-                ObservableCollection<PoItrovati> listpoitrovati = new ObservableCollection<PoItrovati>();
-
-                // faccio un for per ogni poi trovato e a ogni ciclo aggiungo un elemento 
-                // alla LongListSelector
-                for (int i = 0; i < idpoiList.Count; i++)
+                // se non ho trovato nessun PoI lo notifico all'utente con una textbox
+                if (idpoiList.Count == 0)
                 {
-                    // invoco la funzione <code>poi_details</code> per ottenere alcuni dati
-                    // significativi del poi da mostrare nella lista
-                    string json_detail = await WebAPI.poi_details("1", idpoiList[i].idpoi.ToString());
-                    List<PoI> detailpoiList = new List<PoI>();
-                    detailpoiList = Utils.deserializeJSONArray<PoI>(json_detail);
-
-                    // aggiungo il poi alla lista con i dati che mi interessano
-                    listpoitrovati.Add(new PoItrovati
-                    {
-                        idpoi = idpoiList[i].idpoi.ToString(),
-                        immagine = detailpoiList[0].GetUrlThumbImage(),
-                        nome = detailpoiList[0].short_description,
-                        citta = detailpoiList[0].city
-                    });
+                    notfound_txt.Text = "Nessun PoI trovato tramite questa ricerca!";
+                    // stoppo e nascondo la progress bar
+                    progressbar.IsIndeterminate = false;
+                    progressbar.Visibility = Visibility.Collapsed;                 
                 }
-                // stoppo e nascondo la progress bar
-                progressbar.IsIndeterminate = false;
-                progressbar.Visibility = Visibility.Collapsed;
-                // alla fine visualizzo la <code>listpoitrovati</code> tramite la
-                // LongListSelector <code>poitrovati</code>
-                poitrovati.ItemsSource = listpoitrovati;
+                else
+                {
+                    // inizializzo la <code>listpoitrovati</code> come <code>ObservableCollection</code>
+                    // per creare la lista dinamica dei poi trovati
+                    ObservableCollection<PoItrovati> listpoitrovati = new ObservableCollection<PoItrovati>();
+
+                    // faccio un for per ogni poi trovato e a ogni ciclo aggiungo un elemento 
+                    // alla LongListSelector
+                    for (int i = 0; i < idpoiList.Count; i++)
+                    {
+                        // invoco la funzione <code>poi_details</code> per ottenere alcuni dati
+                        // significativi del poi da mostrare nella lista
+                        string json_detail = await WebAPI.poi_details("1", idpoiList[i].idpoi.ToString());
+                        List<PoI> detailpoiList = new List<PoI>();
+                        detailpoiList = Utils.deserializeJSONArray<PoI>(json_detail);
+
+                        // aggiungo il poi alla lista con i dati che mi interessano
+                        listpoitrovati.Add(new PoItrovati
+                        {
+                            idpoi = idpoiList[i].idpoi.ToString(),
+                            immagine = detailpoiList[0].GetUrlThumbImage(),
+                            nome = detailpoiList[0].short_description,
+                            citta = detailpoiList[0].city
+                        });
+                    }
+                    // stoppo e nascondo la progress bar
+                    progressbar.IsIndeterminate = false;
+                    progressbar.Visibility = Visibility.Collapsed;
+                    // alla fine visualizzo la <code>listpoitrovati</code> tramite la
+                    // LongListSelector <code>poitrovati</code>
+                    poitrovati.ItemsSource = listpoitrovati;
+                }
             }
         }
           

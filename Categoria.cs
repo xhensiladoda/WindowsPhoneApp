@@ -18,12 +18,21 @@ namespace AppSDEM
         /** Identificatore della  categoria */
         [DataMember]
         public int idcategory { get; set; }
+        /** Identificatore del PoI */
+        [DataMember]
+        public int idpoi { get; set; }
+        /** Nome del PoI*/
+        [DataMember]
+        public string name { get; set; }
         /** Descrizione della categoria */
         [DataMember]
         public string description { get; set; }
         /** url relativo dell'immagine della categoria */
         [DataMember]
         public string image { get; set; }
+        /** Stringa con la posizione del PoI nel formato lat,lon */
+        [DataMember]
+        public string position { get; set; }
 
         public Categoria() {}
     }

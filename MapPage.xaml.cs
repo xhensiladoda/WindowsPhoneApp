@@ -124,6 +124,11 @@ namespace AppSDEM
         {
             NavigationService.Navigate(new Uri("/PoISearchPage.xaml", UriKind.Relative));
         }
+
+        void GetNearby(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/NearbyPage.xaml", UriKind.Relative));
+        }
         #endregion
 
         /**
@@ -148,6 +153,11 @@ namespace AppSDEM
             searchBarButton.Click += PoiSearch;
             ApplicationBar.Buttons.Add(searchBarButton);
 
+            // creazione dell'icona di Get Nearby
+            ApplicationBarIconButton nearbyBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/nearby.png", UriKind.Relative));
+            nearbyBarButton.Text = "PoI Vicini";
+            nearbyBarButton.Click += GetNearby;
+            ApplicationBar.Buttons.Add(nearbyBarButton);
 
             // Create menu items with localized strings from AppResources.
             // Toggle Location menu item.
@@ -160,6 +170,12 @@ namespace AppSDEM
             searchBarMenuItem.Text = "PoI Search";
             searchBarMenuItem.Click += PoiSearch;
             ApplicationBar.MenuItems.Add(searchBarMenuItem);
+
+            // creazione menu item di GetNearby
+            ApplicationBarMenuItem nearbyBarMenuItem = new ApplicationBarMenuItem();
+            nearbyBarMenuItem.Text = "PoI Vicini";
+            nearbyBarMenuItem.Click += GetNearby;
+            ApplicationBar.MenuItems.Add(nearbyBarMenuItem);
         }
     }
 }
