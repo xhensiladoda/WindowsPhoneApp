@@ -116,6 +116,7 @@
     <Compile Include="Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Compile Include="Utilis.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="login.xaml.cs">

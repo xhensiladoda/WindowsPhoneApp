@@ -60,7 +60,7 @@ namespace AppSDEM
         {
             WebClient wc = WebAPI.createClient();
             // url da chiamare
-            string url = SERVER + LOGIN_API + "?device_id=" + devId + "&mail=" + mail + "&password=" + password;
+            string url = SERVER + LOGIN_API + "?device_id=" + devId + "&user=" + mail + "&password=" + password;
             var tcs = new TaskCompletionSource<string>();
             wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
             wc.DownloadStringAsync(new Uri(url), tcs);

@@ -26,7 +26,7 @@ namespace AppSDEM
             // effettuo la categories_update e deserializzo il risultato
             string listajson = await WebAPI.categories_update("1", false);
             List<Categoria> listacat = new List<Categoria>();
-            listacat = Utils.DeserializeJSONArray<Categoria>(listajson);
+            listacat = Utils.deserializeJSONArray<Categoria>(listajson);
             // creo la lista delle categorie da aggiungere al ListPicker
             List<String> categories = new List<string>();
             // aggiungo all'inizio il modo per cercare in tutte le categorie di default

@@ -53,7 +53,7 @@ namespace AppSDEM
                 string resultjson = e.Uri.ToString();
                 resultjson = resultjson.Substring(resultjson.IndexOf("?") + 1);
                 List<PoI> idpoiList = new List<PoI>();
-                idpoiList = Utils.DeserializeJSONArray<PoI>(resultjson);
+                idpoiList = Utils.deserializeJSONArray<PoI>(resultjson);
                 // se non ho trovato nessun PoI lo notifico all'utente con una textbox
                 if (idpoiList.Count == 0)
                 {
@@ -76,7 +76,7 @@ namespace AppSDEM
                         // significativi del poi da mostrare nella lista
                         string json_detail = await WebAPI.poi_details("1", idpoiList[i].idpoi.ToString());
                         List<PoI> detailpoiList = new List<PoI>();
-                        detailpoiList = Utils.DeserializeJSONArray<PoI>(json_detail);
+                        detailpoiList = Utils.deserializeJSONArray<PoI>(json_detail);
 
                         // aggiungo il poi alla lista con i dati che mi interessano
                         listpoitrovati.Add(new PoItrovati
