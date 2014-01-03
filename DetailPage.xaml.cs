@@ -36,7 +36,7 @@ namespace AppSDEM
             string poi_id = NavigationContext.QueryString["poi_id"];
             string json = await WebAPI.poi_details("2", poi_id);
             List<PoI> poiList = new List<PoI>();
-            poiList = Utils.deserializeJSONArray<PoI>(json);
+            poiList = Utils.DeserializeJSONArray<PoI>(json);
             PoI myPoI = poiList[0];
             // imposta i campi della pagina
             shortdescr.Text = myPoI.short_description;
