@@ -87,7 +87,7 @@ namespace AppSDEM
             string json = await WebAPI.poi_update("2", false);
             List<PoI> poiList = new List<PoI>();
             // recupera la lista dei PoI
-            poiList = Utils.deserializeJSONArray<PoI>(json);
+            poiList = Utils.DeserializeJSONArray<PoI>(json);
             if (poiList.Count != 0)
             {
                 // per ogni poi aggiunge il pushpin alla mappa

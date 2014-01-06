@@ -53,7 +53,7 @@ namespace AppSDEM
                 string myposition = NavigationContext.QueryString["pos"];
 
                 List<Categoria> idpoiList = new List<Categoria>();
-                idpoiList = Utils.deserializeJSONArray<Categoria>(resultjson);
+                idpoiList = Utils.DeserializeJSONArray<Categoria>(resultjson);
                 // se non ho trovato nessun PoI lo notifico all'utente con una textbox
                 if (idpoiList.Count == 0)
                 {
@@ -76,7 +76,7 @@ namespace AppSDEM
                         // significativi del poi da mostrare nella lista
                         string json_detail = await WebAPI.poi_details("1", idpoiList[i].idpoi.ToString());
                         List<PoI> detailpoiList = new List<PoI>();
-                        detailpoiList = Utils.deserializeJSONArray<PoI>(json_detail);
+                        detailpoiList = Utils.DeserializeJSONArray<PoI>(json_detail);
                         string position = idpoiList[i].position;
 
                         // calcolo la distanza da dove sono rispetto al PoI tramite

@@ -35,7 +35,7 @@ namespace AppSDEM
         private async void GetId(String username,String password) {
             string json = await WebAPI.login("1", username, password);
             List<User> user = new List<User>();
-            user = Utils.deserializeJSONArray<User>(json);
+            user = Utils.DeserializeJSONArray<User>(json);
             if(user[0].pk!=0)
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             else MessageBox.Show("Username o Password errati");

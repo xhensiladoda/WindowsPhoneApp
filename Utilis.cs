@@ -15,7 +15,7 @@ namespace AppSDEM
          * @param json: stringa JSON
          * @param T: tipo di oggetti presenti nell'array JSON
          */
-        public static List<T> deserializeJSONArray<T>(string json)
+        public static List<T> DeserializeJSONArray<T>(string json)
         {
             var instance = Activator.CreateInstance<List<T>>();
             using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(json)))

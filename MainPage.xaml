@@ -56,7 +56,7 @@
             <Grid.Background>
                 <ImageBrush Stretch="Fill"/>
             </Grid.Background>
-            <HyperlinkButton HorizontalAlignment="Left" Margin="121,303,0,0" VerticalAlignment="Top" Height="181" Width="211">
+            <HyperlinkButton HorizontalAlignment="Left" Margin="119,303,0,0" VerticalAlignment="Top" Height="181" Width="211" Click="HyperlinkButton_Click_1">
                 <HyperlinkButton.Background>
                     <ImageBrush Stretch="Uniform" ImageSource="niepce_s_camera_obscura_iphoto.png"/>
                 </HyperlinkButton.Background>

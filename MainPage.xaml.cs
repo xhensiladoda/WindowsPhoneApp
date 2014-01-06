@@ -30,6 +30,11 @@ namespace AppSDEM
             //Test2.NavigateUri = new Uri("/Test.xaml", UriKind.Relative);
         }
 
+        private void HyperlinkButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/camera.xaml", UriKind.Relative));
+        }
+
         // Codice di esempio per la realizzazione di una ApplicationBar localizzata
         //private void BuildLocalizedApplicationBar()
         //{
