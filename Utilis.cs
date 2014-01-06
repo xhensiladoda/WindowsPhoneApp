@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Device.Location;
+using System.Globalization;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Text;
@@ -23,6 +24,20 @@ namespace AppSDEM
                 DataContractJsonSerializer deserializer = new DataContractJsonSerializer(instance.GetType());
                 return (List<T>)deserializer.ReadObject(ms);
             }
+        }
+
+        /**
+         * Crea un oggetto GeoCoordinate da una stringa nel formato "lat,lon".
+         * @return: GeoCoordinate del PoI.
+         */
+        public static GeoCoordinate String2GeoCoordinate(string position)
+        {
+            // estrae le due stringhe con le due posizioni
+            string[] coordinate = position.Split(new char[] { ',' });
+            // converte le singole stringe in float
+            float latitute = float.Parse(coordinate[0], CultureInfo.InvariantCulture);
+            float longitude = float.Parse(coordinate[1], CultureInfo.InvariantCulture);
+            return new GeoCoordinate(latitute, longitude);
         }
     }
 }

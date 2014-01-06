@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Device.Location;
-using System.Globalization;
 using System.Windows.Input;
 using System.Linq;
 using System.Text;
@@ -85,16 +84,22 @@ namespace AppSDEM
 
         /**
          * Crea un oggetto GeoCoordinate con le coordinate del PoI.
-         * @return: GeoCoordinate del dispositivo.
+         * @return: GeoCoordinate del PoI.
          */
         public GeoCoordinate GetCoordinate()
         {
-            // estrae le due stringhe con le due posizioni
-            string[] coordinate = position.Split(new char[]{','});
-            // converte le singole stringe in float
-            float latitute = float.Parse(coordinate[0], CultureInfo.InvariantCulture);
-            float longitude = float.Parse(coordinate[1], CultureInfo.InvariantCulture);
-            return new GeoCoordinate(latitute, longitude);
+            return Utils.String2GeoCoordinate(position);
+        }
+
+        /**
+         * Calcola la distanza, in metri, tra il PoI ed un punto la cui posizione è data
+         * nel formato "lat,lon".
+         * @return: distanza in metri del PoI dal punto indicato.
+         */
+        public double DistanceTo(string otherPos)
+        {
+            // codice abbastanza brutale con poche variabili temporanee
+            return GetCoordinate().GetDistanceTo(Utils.String2GeoCoordinate(otherPos));
         }
 
         /**
