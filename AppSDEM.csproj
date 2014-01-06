@@ -223,6 +223,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="camera-icon %284%29.png" />
     <Resource Include="lock_open.jpeg" />
     <Resource Include="niepce_s_camera_obscura_iphoto.png" />
     <Resource Include="recherche_internet.png" />

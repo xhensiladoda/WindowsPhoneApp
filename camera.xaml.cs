@@ -15,7 +15,11 @@ using System.Windows.Media;
 using Windows.Phone.Media.Capture;
 
 namespace AppSDEM
-{
+{   
+    /**
+    * Controller responsabile l'accesso alla fotocamera.
+    * @author Doda Xhensila
+    */
     public partial class camera : PhoneApplicationPage
     {
         private int savedCounter = 0;
@@ -43,15 +47,6 @@ namespace AppSDEM
                     // Uso la fotocamera frontface.
                     cam = new Microsoft.Devices.PhotoCamera(CameraType.FrontFacing);
                 }
-
-                // Evento generato quanto il pulsante hardware è premuto a metà.
-                CameraButtons.ShutterKeyHalfPressed += OnButtonHalfPress;
-
-                //  Evento generato quanto il pulsante hardware è premuto pienamente.
-                CameraButtons.ShutterKeyPressed += OnButtonFullPress;
-
-                //  Evento generato quanto il pulsante hardware è rilasciato.
-                CameraButtons.ShutterKeyReleased += OnButtonRelease;
 
                 // Evento generato quando l'oggetto della fotocamera è stato inizializzato.
                 cam.Initialized += new EventHandler<Microsoft.Devices.CameraOperationCompletedEventArgs>(cam_Initialized);
@@ -87,10 +82,6 @@ namespace AppSDEM
             {
                 // Minimizzare il consumo di energia e per accelerare lo spegnimento.
                 cam.Dispose();
-
-                CameraButtons.ShutterKeyHalfPressed -= OnButtonHalfPress;
-                CameraButtons.ShutterKeyPressed -= OnButtonFullPress;
-                CameraButtons.ShutterKeyReleased -= OnButtonRelease;
 
                 // Rilasciare la memoria, garantire la raccolta di quello che non serve.
                 cam.Initialized -= cam_Initialized;
@@ -269,52 +260,6 @@ namespace AppSDEM
                 e.ImageStream.Close();
             }
         }
-
-        // Auto-focus con a prememendo il pulsante hardware a metà.
-        private void OnButtonHalfPress(object sender, EventArgs e)
-        {
-            if (cam != null)
-            {
-                // Focus dell'immagine.
-                try
-                {
-                    this.Dispatcher.BeginInvoke(delegate()
-                    {
-                        // txtDebug.Text = "Auto Focus";
-                    });
-
-                    cam.Focus();
-                }
-                catch (Exception focusError)
-                {
-                    // Non si può effettuare il focus quando sto catturando un'immagine.
-                    this.Dispatcher.BeginInvoke(delegate()
-                    {
-                        txtDebug.Text = focusError.Message;
-                    });
-                }
-            }
-        }
-
-        // Cattura dell'immagine premendo pienamente il pulsante hardware.
-        private void OnButtonFullPress(object sender, EventArgs e)
-        {
-            if (cam != null)
-            {
-                cam.CaptureImage();
-            }
-        }
-
-        // Cancello il focus quando rilascio il pulsante.
-        private void OnButtonRelease(object sender, EventArgs e)
-        {
-
-            if (cam != null)
-            {
-                cam.CancelFocus();
-            }
-        }
-
 
     }
 }

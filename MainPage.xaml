@@ -68,8 +68,8 @@
                 </HyperlinkButton.Background>
                 <ToggleButton Content="ToggleButton" Height="2" Width="29"/>
             </HyperlinkButton>
-            <TextBlock HorizontalAlignment="Left" Margin="217,456,0,0" TextWrapping="Wrap" Text="CAMERA" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FFBD9922"/>
-            <TextBlock HorizontalAlignment="Left" Margin="256,133,0,0" TextWrapping="Wrap" Text="MAP" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FF514211"/>
+            <TextBlock HorizontalAlignment="Left" Margin="204,456,0,0" TextWrapping="Wrap" Text="CAMERA" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FFBD9922"/>
+            <TextBlock HorizontalAlignment="Left" Margin="243,133,0,0" TextWrapping="Wrap" Text="MAP" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FF514211"/>
             <HyperlinkButton Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Segoe WP SemiLight" Height="93" Width="96" FontStyle="Italic" Foreground="#FFE43131" Click="HyperlinkButton_Click">
             	<HyperlinkButton.Background>
             		<ImageBrush Stretch="None" ImageSource="lock_open.jpeg"/>

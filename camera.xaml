@@ -18,8 +18,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="800"/>
         </Grid.RowDefinitions>
-        <Canvas x:Name="viewfinderCanvas" Width="704" 
-                   HorizontalAlignment="Left" Margin="10,20,0,320" >
+        <Canvas x:Name="viewfinderCanvas" Width="693" 
+                   HorizontalAlignment="Left" Margin="10,10,0,330" >
 
             <!--Fotocamera viewfinder -->
             <Canvas.Background>
@@ -27,11 +27,14 @@
             </Canvas.Background>
         </Canvas>
         <!--Button StackPanel in fondo al viewfinder>-->
-        <StackPanel Margin="562.907,214.977,-160.93,515.023" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="True" d:LayoutRounding="Auto" >
+        <StackPanel Margin="556.773,195.504,-159.023,524.437" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
         	<StackPanel.RenderTransform>
         		<CompositeTransform Rotation="-88.808"/>
         	</StackPanel.RenderTransform>
-            <Button x:Name="ShutterButton" Content="Click" Click="ShutterButton_Click" FontSize="26" FontWeight="ExtraBold" Height="82.634" Background="#BFE4CC79" Margin="123.521,0,112.434,0" RenderTransformOrigin="0.529,0.488" UseLayoutRounding="True" d:LayoutRounding="Auto" Foreground="Black" BorderBrush="{x:Null}" >
+            <Button x:Name="ShutterButton" Content="" Click="ShutterButton_Click" FontSize="26" FontWeight="ExtraBold" Height="98.645" Margin="151.852,0,139.901,0" RenderTransformOrigin="0.529,0.488" UseLayoutRounding="False" d:LayoutRounding="Auto" Foreground="Black" BorderBrush="{x:Null}" >
+            	<Button.Background>
+            		<ImageBrush Stretch="Fill" ImageSource="camera-icon (4).png"/>
+            	</Button.Background>
             	<Button.RenderTransform>
             		<CompositeTransform Rotation="0.075" SkewX="0.669" TranslateX="4.057" TranslateY="-2.95" SkewY="-0.681"/>
             	</Button.RenderTransform>
