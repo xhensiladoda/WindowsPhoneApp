@@ -21,12 +21,12 @@
         <Canvas x:Name="viewfinderCanvas" Width="704" 
                    HorizontalAlignment="Left" Margin="10,20,0,320" >
 
-            <!--Camera viewfinder -->
+            <!--Fotocamera viewfinder -->
             <Canvas.Background>
                 <VideoBrush x:Name="viewfinderBrush" />
             </Canvas.Background>
         </Canvas>
-        <!--Button StackPanel to the right of viewfinder>-->
+        <!--Button StackPanel in fondo al viewfinder>-->
         <StackPanel Margin="562.907,214.977,-160.93,515.023" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="True" d:LayoutRounding="Auto" >
         	<StackPanel.RenderTransform>
         		<CompositeTransform Rotation="-88.808"/>
@@ -38,7 +38,7 @@
             </Button>
         </StackPanel>
 
-        <!--Used for debugging >-->
+        <!--Utile per il debugging, per il momento non usato >-->
         <TextBlock Height="40" HorizontalAlignment="Left" Margin="8,428,0,0" Name="txtDebug" VerticalAlignment="Top" Width="626" FontSize="24" FontWeight="ExtraBold" />
     </Grid>
 
