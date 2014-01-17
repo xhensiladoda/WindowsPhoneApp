@@ -120,7 +120,7 @@
       <DependentUpon>Test.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
-    <Compile Include="Utilis.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>

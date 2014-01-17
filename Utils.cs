@@ -35,9 +35,9 @@ namespace AppSDEM
             // estrae le due stringhe con le due posizioni
             string[] coordinate = position.Split(new char[] { ',' });
             // converte le singole stringe in float
-            float latitute = float.Parse(coordinate[0], CultureInfo.InvariantCulture);
+            float latitude = float.Parse(coordinate[0], CultureInfo.InvariantCulture);
             float longitude = float.Parse(coordinate[1], CultureInfo.InvariantCulture);
-            return new GeoCoordinate(latitute, longitude);
+            return new GeoCoordinate(latitude, longitude);
         }
     }
 }

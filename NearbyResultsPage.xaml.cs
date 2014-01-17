@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using Windows.Devices.Geolocation;
+using System.Device.Location;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -49,9 +51,17 @@ namespace AppSDEM
                 // ottengo la risposta in formato json dalla funzione <code>get_nearby</code>
                 // e la deserializzo creando la lista <code>idpoiList</code>
                 string resultjson = e.Uri.ToString();
-                resultjson = resultjson.Substring(resultjson.IndexOf("result=") + 7);
-                string myposition = NavigationContext.QueryString["pos"];
+                // se vengono passate le coordinate
+                // resultjson = resultjson.Substring(resultjson.IndexOf("result=") + 7);
+                // string myposition = NavigationContext.QueryString["pos"];
+                resultjson = NavigationContext.QueryString["result"];
 
+                // invoco la funzione di GeoLocator per ritornare la mia posizione
+                Geolocator myGeolocator = new Geolocator();
+                Geoposition myGeoposition = await myGeolocator.GetGeopositionAsync();
+                string currentLocation = myGeoposition.Coordinate.ToGeoCoordinate().ToString();
+                // string currentLocation = new GeoCoordinate(44.67, 10.97).ToString();
+                
                 List<Categoria> idpoiList = new List<Categoria>();
                 idpoiList = Utils.DeserializeJSONArray<Categoria>(resultjson);
                 // se non ho trovato nessun PoI lo notifico all'utente con una textbox
@@ -77,11 +87,11 @@ namespace AppSDEM
                         string json_detail = await WebAPI.poi_details("1", idpoiList[i].idpoi.ToString());
                         List<PoI> detailpoiList = new List<PoI>();
                         detailpoiList = Utils.DeserializeJSONArray<PoI>(json_detail);
-                        string position = idpoiList[i].position;
-
-                        // calcolo la distanza da dove sono rispetto al PoI tramite
-                        // la funzione <code>PoIDistance</code>
-                        float distance = PoIDistance(myposition, position);
+                        string poiposition = idpoiList[i].position;
+                        // calcolo la distanza da dove sono rispetto al PoI
+                        detailpoiList[0].position = poiposition;
+                        // divido per 1000 poichè la funzione restituisce il risultato in metri
+                        float distance = (float)(detailpoiList[0].DistanceTo(currentLocation))/1000;
 
                         // aggiungo il poi alla lista con i dati che mi interessano
                         listpoivicini.Add(new PoIvicini
@@ -101,42 +111,6 @@ namespace AppSDEM
                     poivicini.ItemsSource = listpoivicini;
                 }
             }
-        }
-
-        private float PoIDistance(string myposition, string position)
-        {
-            // raggio medio della Terra
-            float earth_radius = 6371f;
-
-            // estraggo latitudine e longitudine di dove mi trovo e le trasformo in radianti
-            string[] mypos = myposition.Split(new char[] { '-' });
-            float mylat = float.Parse(mypos[0]);
-            float mylon = float.Parse(mypos[1]);
-            float mylatRad = DegreeToRadians(mylat);
-            float mylonRad = DegreeToRadians(mylon);
-
-            // estraggo latitudine e longitudine del PoI e le trasformo in radianti
-            string[] pos = position.Split(new char[] { ',' });
-            float lat = float.Parse(pos[0], CultureInfo.InvariantCulture);
-            float lon = float.Parse(pos[1], CultureInfo.InvariantCulture);
-            float latRad = DegreeToRadians(lat);
-            float lonRad = DegreeToRadians(lon);
-
-            // tramite la trigonometria calcolo la distanza spaziale tra dove sono e il PoI
-            float phi = Math.Abs(mylonRad - lonRad);
-            float point = (float)Math.Acos((Math.Sin(mylatRad) * Math.Sin(latRad)) + (Math.Cos(mylatRad) * Math.Cos(latRad) * Math.Cos(phi)));
-            float distance = point * earth_radius;
-
-            // ritorno la distanza
-            return distance;
-        }
-
-        /**
-         * Funzione che trasforma un angolo da gradi in radianti
-         */ 
-        private float DegreeToRadians(float angle)
-        {
-            return (float)Math.PI * angle / 180f;
         }
 
         /**
