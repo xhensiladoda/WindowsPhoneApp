@@ -16,6 +16,8 @@ using System.Windows.Media;
 using System.Threading.Tasks;
 using AppSDEM.Resources;
 
+
+
 namespace AppSDEM
 {
     /**
@@ -23,10 +25,12 @@ namespace AppSDEM
      * Di default la mappa viene centrata sulla posizione corrente del dispositivo.
      * @author Setti Davide
      */
+
+
     public partial class MapPage : PhoneApplicationPage
     {
         /** Base zomm level. */
-        const int BASE_ZOOMLEVEL = 10;
+        const int BASE_ZOOMLEVEL = 5;
         /** Coordinates of current location. */
         GeoCoordinate currentLocation = null;
         /** Layer for display current location on the Map. */
@@ -52,6 +56,7 @@ namespace AppSDEM
             // Center map on location
             await GetLocation();
             await CenterMapOnLocation();
+
             // Show dot on location
             ShowLocation();
          }
@@ -77,32 +82,102 @@ namespace AppSDEM
             marker.Visibility = Visibility.Visible;
         }
 
+
+        public class PoIonTap {
+            public int id { get; set; }
+            public string name { get; set; }
+            public Image imm { get; set; }
+        }
+
         /**
          * Chiamata asincrona per inserire all'interno della mappa i pushpin
          * dei PoI, ottenuti tramite l'API <code>poi_update</code>.
          */
         private async void PrintPoi()
         {
-            // chiamata alla webapi
+            // chiamata alla webapi per la lista PoI
             string json = await WebAPI.poi_update("2", false);
             List<PoI> poiList = new List<PoI>();
             // recupera la lista dei PoI
             poiList = Utils.DeserializeJSONArray<PoI>(json);
+
+            // chiamata alla webapi per la lista categorie
+            json = await WebAPI.categories_update("1", false);
+            List<Categoria> catList = new List<Categoria>();
+            // recupera la lista delle categorie
+            catList = Utils.DeserializeJSONArray<Categoria>(json);
+                
             if (poiList.Count != 0)
-            {
-                // per ogni poi aggiunge il pushpin alla mappa
-                poiLayer = new MapLayer();
-                foreach(PoI poi in poiList)
+            {  
+                Image catImage;
+                // creo un array di PoIonTap contenente dati che mi servirà passare nel Tap del PoI
+                PoIonTap[] poiTap = new PoIonTap[poiList.Count];
+                for (int i = 0; i < poiList.Count; ++i)
                 {
-                    Pushpin pushpin = poi.BuildPushpin();
+                    poiTap[i] = new PoIonTap();
+                }
+
+                poiLayer = new MapLayer();
+                // per ogni poi aggiunge il pushpin alla mappa
+                for (int i=0; i<poiList.Count; ++i)
+                {
                     MapOverlay myOverlay = new MapOverlay();
-                    myOverlay.Content = pushpin;
-                    myOverlay.GeoCoordinate = poi.GetCoordinate();
+                    // estraggo l'immagine della categoria a cui il PoI appartiene
+                    catImage = catList[poiList[i].idcategory - 1].GetNormImage();
+                    // riempio il poiTap con i dati che mi serve passare nella imm_Tap
+                    poiTap[i].id = poiList[i].idpoi;
+                    poiTap[i].imm = catImage;
+                    poiTap[i].name = poiList[i].short_description;
+                    
+                    // setto l'immagine della categoria come pushpin
+                    myOverlay.Content = poiTap[i].imm;
+                    // setto il DataContext da passare nella funzione imm_Tap
+                    poiTap[i].imm.DataContext = poiTap[i];
+                    poiTap[i].imm.Tap += imm_Tap;
+                       
+                    myOverlay.GeoCoordinate = poiList[i].GetCoordinate();
                     poiLayer.Add(myOverlay);
                 }
-                poiMap.Layers.Add(poiLayer);
+                poiMap.Layers.Add(poiLayer);               
             }
         }
+
+        /*
+         * Funzione che si attiva al tap di un pushpin
+         */ 
+        void imm_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            // ottengo i parametri che ho passsato e li metto nell'item
+            PoIonTap item = ((FrameworkElement)e.OriginalSource).DataContext as PoIonTap;
+
+            // creo l'hyperlink button per passare alla pagina dei dettagli
+            HyperlinkButton button = new HyperlinkButton();
+            button.Content = "more details >>>";
+            // crea la querystring
+            string qString = "poi_id=" + item.id;
+            // imposto la qString come DataContext che verrà poi passata alla button_Tap
+            button.DataContext = qString;
+            button.Tap += button_Tap;
+            
+            // creo una CustomMessaBox per visualizzare il nome del PoI su cui clicco
+            CustomMessageBox cmb = new CustomMessageBox()
+                {
+                    Caption = item.name,
+                    Content = button,
+                    LeftButtonContent = "Close",         
+                };
+            cmb.Show();
+        }
+
+        /*
+         * Funzione che si attiva al tap dell'hyperlink button per i dettagli
+         */
+        void button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            string item = ((FrameworkElement)e.OriginalSource).DataContext as string;
+            NavigationService.Navigate(new Uri("/DetailPage.xaml?" + item, UriKind.Relative));
+        }
+
 
         /**
          * Centra la mappa sulla pozione attuale del dispositivo.

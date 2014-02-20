@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace AppSDEM
 {
@@ -35,7 +36,49 @@ namespace AppSDEM
         public string position { get; set; }
 
         public Categoria() {}
-    }
 
-    
+      /**
+       * Carica l'immagine specificata dal server.
+       * @param img: indirizzo relativo dell'immagine nella directory server
+       * @return: l'immagine selezionata
+       */
+        private Image GetImage(string img)
+        {
+            string url = SERVER_IMAGE_URL + img;
+            Image image = new Image();
+            image.Source = new System.Windows.Media.Imaging.BitmapImage(
+            new Uri(url, UriKind.RelativeOrAbsolute));
+            return image;
+        }
+
+        /**
+        * Carica l'immagine normale del PoI dal server.
+        * @return: immagine del PoI
+        */
+        public Image GetNormImage()
+        {
+            return GetImage(image);
+        }
+
+        /**
+         * Ottiene l'indirizzo url dell'immagine specificata dal server
+         * @param img: indirizzo relativo dell'immagine nella directory server
+         * @return: url dell'immagine selezionata
+         */
+        private string GetUrlImage(string img)
+        {
+            string url = SERVER_IMAGE_URL + img;
+            return url;
+        }
+
+        /**
+        * Ottiene l'url dell'immagine normale del PoI dal server
+        * @return: url dell'immagine normale del PoI
+        */
+        public string GetUrlNormImage()
+        {
+            return GetUrlImage(image);
+        }
+
+    }
 }
