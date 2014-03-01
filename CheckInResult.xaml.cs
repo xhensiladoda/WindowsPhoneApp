@@ -30,23 +30,29 @@ namespace AppSDEM
             InitializeComponent();
         }
 
+        /**  Funzione che visualizza la lista dei CheckIn effettuati dall'utente.
+         */
+
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Controllo se la lista è vuota all'inizio.
             if (listacheckin.SelectedItem == null) {
                 progressbar.IsIndeterminate = true;
+
+                //Chiamo l'API per visualizzare i checkin per l'utente con ID=9.
                 string json = await WebAPI.get_user_checkin("1","9","True");
                 List<CheckIn> checkin = new List<CheckIn>();
                 checkin = Utils.DeserializeJSONArray<CheckIn>(json);
                 if (checkin.Count == 0)
                 {
                     notfound_txt.Text = "Nessun CheckIn disponibile per questo utente!";
-                    // stoppo e nascondo la progress bar
+                    // Stoppo e nascondo la progress bar
                     progressbar.IsIndeterminate = false;
                     progressbar.Visibility = Visibility.Collapsed;
 
                 }
                 else
-                {
+                {   //Salvo i dettagli che andrò a visualizzare.
                     ObservableCollection<CheckInDisponibili> checkin_trovati= new ObservableCollection<CheckInDisponibili>();
                     for (int i = 0; i < checkin.Count; i++)
                     {
@@ -64,8 +70,6 @@ namespace AppSDEM
 
             
             }
-        
-        
         }
     }
 }

@@ -46,12 +46,17 @@ namespace AppSDEM
 
         public CheckIn() { }
 
+        /** Funzione che permette di recuperare l'url dell'immagine nel server.
+         * @param img: immagine che è recuperata dalla deserializzazione del json.
+         */
         private string GetUrlImage(string img)
         {
             string url = SERVER_IMAGE_URL + img;
             return url;
         }
 
+        /** Funzione che restituisce l'immagine.
+         */
         public string GetImage()
         {
             return GetUrlImage(image);
