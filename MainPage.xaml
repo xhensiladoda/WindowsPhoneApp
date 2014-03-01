@@ -12,15 +12,18 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+    <ScrollViewer>
+        <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
+        <Grid x:Name="LayoutRoot" Height="1000">
+            <Grid.Background>
+                <ImageBrush Stretch="Fill"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-    <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!-- NOTA SULLA LOCALIZZAZIONE:
+            <!-- NOTA SULLA LOCALIZZAZIONE:
             Per localizzare le stringhe visualizzate copiarne i valori in chiavi denominate in modo appropriato
             nel file di risorse della lingua neutra dell'applicazione (AppResources.resx) quindi
             sostituire il valore del testo hard-coded tra le virgolette degli attributi
@@ -39,53 +42,59 @@
             CurrentUICulture dell'applicazione al momento del runtime.
          -->
 
-        <!--TitlePanel contiene il nome dell'applicazione e il titolo della pagina-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Geolocation App" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" Foreground="#FFBD9922"/>
-            <TextBlock Margin="12,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Height="92" Text="Welcome!" Foreground="#FFC1611E"/>
-            <Border BorderBrush="Black" BorderThickness="1" Height="9"/>
-            <TextBlock TextWrapping="Wrap" Foreground="#FFBD9922">
+            <!--TitlePanel contiene il nome dell'applicazione e il titolo della pagina-->
+            <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+                <TextBlock Text="Geolocation App" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" Foreground="#FFBD9922"/>
+                <TextBlock Margin="12,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Height="92" Text="Welcome!" Foreground="#FFC1611E"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="9"/>
+                <TextBlock TextWrapping="Wrap" Foreground="#FFBD9922">
             	<Run Text="This is an application of geolocation."/>
             	<LineBreak/>
             	<Run Text="Search can be done through the map or you can take a picture by the camera and then use it for searching."/>
-            </TextBlock>
-        </StackPanel>
+                </TextBlock>
+            </StackPanel>
+            <!--ContentPanel - inserire ulteriore contenuto qui-->
+            <Grid x:Name="ContentPanel" ShowGridLines="True" Height="856" VerticalAlignment="Top" Margin="0,0,0,-129" Grid.Row="1">
+                <Grid.Background>
+                    <ImageBrush Stretch="Fill"/>
+                </Grid.Background>
+                <HyperlinkButton HorizontalAlignment="Left" Margin="119,303,0,0" VerticalAlignment="Top" Height="181" Width="211" Click="HyperlinkButton_Click_1">
+                    <HyperlinkButton.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="niepce_s_camera_obscura_iphoto.png"/>
+                    </HyperlinkButton.Background>
+                    <ToggleButton Content="ToggleButton" Height="2" Width="29"/>
+                </HyperlinkButton>
+                <HyperlinkButton HorizontalAlignment="Left" Margin="121,67,0,0" VerticalAlignment="Top" Height="181" Width="211" NavigateUri="/MapPage.xaml">
+                    <HyperlinkButton.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="recherche_internet.png"/>
+                    </HyperlinkButton.Background>
+                    <ToggleButton Content="ToggleButton" Height="2" Width="29"/>
+                </HyperlinkButton>
+                <TextBlock HorizontalAlignment="Left" Margin="204,456,0,0" TextWrapping="Wrap" Text="CAMERA" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FFBD9922"/>
+                <TextBlock HorizontalAlignment="Left" Margin="243,133,0,0" TextWrapping="Wrap" Text="MAP" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FF514211"/>
+                <HyperlinkButton Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Segoe WP SemiLight" Height="93" Width="96" FontStyle="Italic" Foreground="#FFE43131" Click="HyperlinkButton_Click">
+                    <HyperlinkButton.Background>
+                        <ImageBrush Stretch="None" ImageSource="lock_open.jpeg"/>
+                    </HyperlinkButton.Background>
+                </HyperlinkButton>
+                <TextBlock HorizontalAlignment="Left" Margin="23,67,0,0" TextWrapping="Wrap" Text="LOGIN" VerticalAlignment="Top" FontFamily="AR BLANCA" FontSize="21.333" Foreground="#FFC5A22F"/>
+                <HyperlinkButton Name="Test2" Content="Test" HorizontalAlignment="Left" Margin="53,162,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
+                <HyperlinkButton Content="" HorizontalAlignment="Left" Margin="140,547,0,153" NavigateUri="/CheckInResult.xaml" Width="192">
+                    <HyperlinkButton.Background>
+                        <ImageBrush Stretch="Fill" ImageSource="wood-map-icon.png"/>
+                    </HyperlinkButton.Background>
+                </HyperlinkButton>
+                <TextBlock HorizontalAlignment="Left" Margin="179,655,0,0" TextWrapping="Wrap" Text="CHECKIN" VerticalAlignment="Top" RenderTransformOrigin="0.408,1.607" FontSize="26.667" FontFamily="AR BLANCA" Foreground="#FFEAD826" Width="122"/>
+            </Grid>
 
-        <!--ContentPanel - inserire ulteriore contenuto qui-->
-        <Grid x:Name="ContentPanel" Margin="14,0,10,-79" ShowGridLines="True" Grid.Row="1">
-            <Grid.Background>
-                <ImageBrush Stretch="Fill"/>
-            </Grid.Background>
-            <HyperlinkButton HorizontalAlignment="Left" Margin="119,303,0,0" VerticalAlignment="Top" Height="181" Width="211" Click="HyperlinkButton_Click_1">
-                <HyperlinkButton.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="niepce_s_camera_obscura_iphoto.png"/>
-                </HyperlinkButton.Background>
-                <ToggleButton Content="ToggleButton" Height="2" Width="29"/>
-            </HyperlinkButton>
-            <HyperlinkButton HorizontalAlignment="Left" Margin="121,67,0,0" VerticalAlignment="Top" Height="181" Width="211" NavigateUri="/MapPage.xaml">
-                <HyperlinkButton.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="recherche_internet.png"/>
-                </HyperlinkButton.Background>
-                <ToggleButton Content="ToggleButton" Height="2" Width="29"/>
-            </HyperlinkButton>
-            <TextBlock HorizontalAlignment="Left" Margin="204,456,0,0" TextWrapping="Wrap" Text="CAMERA" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FFBD9922"/>
-            <TextBlock HorizontalAlignment="Left" Margin="243,133,0,0" TextWrapping="Wrap" Text="MAP" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FF514211"/>
-            <HyperlinkButton Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Segoe WP SemiLight" Height="93" Width="96" FontStyle="Italic" Foreground="#FFE43131" Click="HyperlinkButton_Click">
-            	<HyperlinkButton.Background>
-            		<ImageBrush Stretch="None" ImageSource="lock_open.jpeg"/>
-            	</HyperlinkButton.Background>
-            </HyperlinkButton>
-            <TextBlock HorizontalAlignment="Left" Margin="23,67,0,0" TextWrapping="Wrap" Text="LOGIN" VerticalAlignment="Top" FontFamily="AR BLANCA" FontSize="21.333" Foreground="#FFC5A22F"/>
-            <HyperlinkButton Name="Test2" Content="Test" HorizontalAlignment="Left" Margin="259,10,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
-        </Grid>
 
-        <!--Rimuovere il commento per vedere la griglia di allineamento che consenta di verificare che i controlli siano
+            <!--Rimuovere il commento per vedere la griglia di allineamento che consenta di verificare che i controlli siano
             allineati ai limiti comuni.  L'immagine ha un margine superiore di -32px tenendo
             conto della barra delle applicazioni. Impostarlo su 0 (o eliminare tutti i margini)
             se la barra delle applicazioni è nascosta.
 
             Prima della spedizioni, eliminare questo XAML e l'immagine stessa.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
-    </Grid>
-
+            <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
+        </Grid>
+    </ScrollViewer>
 </phone:PhoneApplicationPage>

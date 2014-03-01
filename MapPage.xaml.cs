@@ -164,9 +164,37 @@ namespace AppSDEM
                 {
                     Caption = item.name,
                     Content = button,
-                    LeftButtonContent = "Close",         
+                    LeftButtonContent = "Close",
+                    RightButtonContent = "Add CheckIn", 
                 };
+           
+            cmb.Dismissed += (s1, e1) =>
+            {
+                switch (e1.Result)
+                {
+                    case CustomMessageBoxResult.RightButton:
+                        //Se l'utente clicca il righbutton allora invoco la funzione per aggiungere il checkin
+                        addCheckIn("1",Convert.ToString(item.id), "manual", "9");
+                        break;
+                }
+            };
             cmb.Show();
+        }
+
+        private async void addCheckIn(string devId, string poiId, string type, string userId)
+        {
+            string json = await WebAPI.checkin_add(devId, poiId, type, userId);
+            MessageBox.Show("Aggiunto tra i CheckIn POI=" + poiId); 
+            
+            /* Potrei verificare se il checkin è andato a buon fine,
+             * anche se i dati non sono inseriti ma recuperati in modo automatico,
+             * quindi non ci dovrebbero essere problemi.
+             *
+             * List<CheckInStatus> checkin = new List<CheckInStatus>();
+             * checkin = Utils.DeserializeJSONArray<CheckInStatus>(json);
+             * if(checkin[0].Status=="Success") Ok
+             * else Something is wrong.
+            */
         }
 
         /*

@@ -15,13 +15,13 @@ namespace AppSDEM
     [DataContract]
     class User
     {
-        // primary key
+        /** Identificatore della primary key */
         [DataMember]
         public int pk { get; set; }
-        // model
+        /** Model */
         [DataMember]
         public string model { get; set; }
-        // fields
+        /** Fields*/
         [DataMember]
         public fields fields { get; set; }
 

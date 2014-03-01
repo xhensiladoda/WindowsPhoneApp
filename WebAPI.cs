@@ -201,6 +201,45 @@ namespace AppSDEM
             return result;
         }
 
+        /**
+         * Chiama in maniera asincrona il server e restituisce il risultato della funzione get_user_checkin
+         * @param devId: device id
+         * @param userId: user id
+         * @param all: 
+         * @author Xhensila Doda
+        */
+
+        public static async Task<string> get_user_checkin(string devId, string userId, string all) {
+            WebClient wc = WebAPI.createClient();
+            // url da chiamare
+            string url = SERVER + API + API_VER + "get_user_checkin?device_id=" + devId + "&user_id=" + userId + "&all=" + all;
+            var tcs = new TaskCompletionSource<string>();
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
+            string result = await tcs.Task;
+            return result;
+        }
+
+        /**
+         * Chiama in maniera asincrona il server e restituisce il risultato della funzione checkin_add
+         * @param devId: device id
+         * @param poiId: POI id
+         * @param type: tipo di checkin
+         * @param userId: user id
+         * @author Xhensila Doda
+        */
+        public static async Task<string> checkin_add(string devId, string poiId, string type, string userId) {
+            WebClient wc = WebAPI.createClient();
+            // url da chiamare
+            string url = SERVER + API + API_VER + "checkin_add?device_id=" + devId + "&poi_id=" + poiId +
+                "&type=" + type + "&user_id="+ userId;
+            var tcs = new TaskCompletionSource<string>();
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(asyncResponseReceive);
+            wc.DownloadStringAsync(new Uri(url), tcs);
+            string result = await tcs.Task;
+            return result;
+        }
+
 
 		// TODO: implementare le altre web API
     }
