@@ -32,12 +32,14 @@
             <TextBlock Text="PoI Vicini" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
             <TextBlock Text="Scegli il raggio di ricerca centrato nella tua posizione. Verranno mostrati i 10 PoI più vicini a te." TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}" Height="90" Margin="12,0,10,0"/>
         </StackPanel>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <HyperlinkButton Content="Cerca!" HorizontalAlignment="Left" Margin="190,410,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
+            <TextBlock x:Name="attesa_txt" HorizontalAlignment="Left" Margin="31,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextAlignment="Center" Height="77" Width="401"/>
+            <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="20" Margin="55,288,0,0" VerticalAlignment="Top" Width="355" Visibility="Collapsed"/>
+            <toolkit:ListPicker x:Name="listraggi" FontSize="25" HorizontalAlignment="Left" Height="331" Margin="151,40,0,0" VerticalAlignment="Top" Width="173" ItemTemplate="{Binding lprtemplate}"/>
+        </Grid>
 
         <!--ContentPanel - inserire ulteriore contenuto qui-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <toolkit:ListPicker Name="listraggi" FontSize="25" HorizontalAlignment="Left" Height="331" Margin="151,40,0,0" VerticalAlignment="Top" Width="173" ItemTemplate="{Binding lprtemplate}"></toolkit:ListPicker>
-            <HyperlinkButton Content="Cerca!" HorizontalAlignment="Left" Margin="190,410,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
-        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

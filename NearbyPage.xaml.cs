@@ -37,6 +37,10 @@ namespace AppSDEM
 
         private async void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
+            attesa_txt.Text = "Attendere!\nSto ottenendo la tua posizione GPS!";
+            progressbar.Visibility = System.Windows.Visibility.Visible;
+            progressbar.IsIndeterminate = true;
+
             // come default metto un raggio senza limite
             float radius = 100000f;
             // in base alla scelta dell'utente nel ListPicker cambio il valore del raggio
@@ -53,8 +57,6 @@ namespace AppSDEM
             Geolocator myGeolocator = new Geolocator();
             Geoposition myGeoposition = await myGeolocator.GetGeopositionAsync();
             string currentLocation = myGeoposition.Coordinate.ToGeoCoordinate().ToString();
-            // se voglio mettergli direttamente una coordinata per testare
-            // string currentLocation = new GeoCoordinate(44.67, 10.97).ToString();
 
             // estrae le due stringhe con le due posizioni
             string[] coordinate = currentLocation.Split(new char[] { ',' });
@@ -65,8 +67,10 @@ namespace AppSDEM
             // chiamo la funzione get_nearby per ottenere la lista dei PoI vicini 
             // e mando il risultato alla pagina dei risultati
             string result = await WebAPI.get_nearby("1", "1", latitude, longitude, radius);
-            // se voglio passare le coordinate
-            // NavigationService.Navigate(new Uri("/NearbyResultsPage.xaml?pos="+latitude+"-"+longitude+"&result=" + result, UriKind.Relative));
+
+            progressbar.IsIndeterminate = false;
+            progressbar.Visibility = Visibility.Collapsed;
+
             NavigationService.Navigate(new Uri("/NearbyResultsPage.xaml?result=" + result, UriKind.Relative));
         }
     }

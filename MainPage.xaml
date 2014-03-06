@@ -74,7 +74,7 @@
                 <TextBlock HorizontalAlignment="Left" Margin="243,133,0,0" TextWrapping="Wrap" Text="MAP" VerticalAlignment="Top" RenderTransformOrigin="0.244,0.315" FontSize="24" FontFamily="AR BLANCA" Foreground="#FF514211"/>
                 <HyperlinkButton Name="loginbutton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Segoe WP SemiLight" Height="93" Width="96" FontStyle="Italic" Foreground="#FFE43131" Click="HyperlinkButton_Click" Visibility="Collapsed">
                     <HyperlinkButton.Background>
-                        <ImageBrush Stretch="None" ImageSource="lock_open.jpeg"/>
+                        <ImageBrush Stretch="None" ImageSource="login.png"/>
                     </HyperlinkButton.Background>
                 </HyperlinkButton>
                 <HyperlinkButton Name="Test2" Content="Test" HorizontalAlignment="Left" Margin="53,162,0,0" VerticalAlignment="Top" Click="HyperlinkButton_Click"/>
@@ -84,7 +84,11 @@
                     </HyperlinkButton.Background>
                 </HyperlinkButton>
                 <TextBlock HorizontalAlignment="Left" Margin="179,655,0,0" TextWrapping="Wrap" Text="CHECKIN" VerticalAlignment="Top" RenderTransformOrigin="0.408,1.607" FontSize="26.667" FontFamily="AR BLANCA" Foreground="#FFEAD826" Width="122"/>
-                <HyperlinkButton Name="logoutbutton" Content="LOGOUT" HorizontalAlignment="Left" Margin="282,10,0,0" VerticalAlignment="Top" Height="52" Width="198" Click="Logout" Visibility="Collapsed"/>
+                <HyperlinkButton Name="logoutbutton" Content="" HorizontalAlignment="Left" Margin="282,-16,0,0" VerticalAlignment="Top" Height="83" Width="198" Click="Logout" Visibility="Collapsed">
+                    <HyperlinkButton.Background>
+                        <ImageBrush Stretch="None" ImageSource="logout.png"/>
+                    </HyperlinkButton.Background>
+                 </HyperlinkButton>
             </Grid>
 
 

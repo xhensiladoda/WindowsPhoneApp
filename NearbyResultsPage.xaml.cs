@@ -25,6 +25,7 @@ namespace AppSDEM
         public string nome { get; set; }
         public string citta { get; set; }
         public string distanza { get; set; }
+        public string posizione { get; set; }
     }
 
     /**
@@ -51,16 +52,7 @@ namespace AppSDEM
                 // ottengo la risposta in formato json dalla funzione <code>get_nearby</code>
                 // e la deserializzo creando la lista <code>idpoiList</code>
                 string resultjson = e.Uri.ToString();
-                // se vengono passate le coordinate
-                // resultjson = resultjson.Substring(resultjson.IndexOf("result=") + 7);
-                // string myposition = NavigationContext.QueryString["pos"];
                 resultjson = NavigationContext.QueryString["result"];
-
-                // invoco la funzione di GeoLocator per ritornare la mia posizione
-                Geolocator myGeolocator = new Geolocator();
-                Geoposition myGeoposition = await myGeolocator.GetGeopositionAsync();
-                string currentLocation = myGeoposition.Coordinate.ToGeoCoordinate().ToString();
-                // string currentLocation = new GeoCoordinate(44.67, 10.97).ToString();
                 
                 List<Categoria> idpoiList = new List<Categoria>();
                 idpoiList = Utils.DeserializeJSONArray<Categoria>(resultjson);
@@ -77,6 +69,11 @@ namespace AppSDEM
                     // inizializzo la <code>listpoivicini</code> come <code>ObservableCollection</code>
                     // per creare la lista dinamica dei poi vicini trovati
                     ObservableCollection<PoIvicini> listpoivicini = new ObservableCollection<PoIvicini>();
+
+                    // invoco la funzione di GeoLocator per ritornare la mia posizione
+                    Geolocator myGeolocator = new Geolocator();
+                    Geoposition myGeoposition = await myGeolocator.GetGeopositionAsync();
+                    string currentLocation = myGeoposition.Coordinate.ToGeoCoordinate().ToString();
 
                     // faccio un for per ogni poi vicino trovato e ad ogni ciclo aggiungo un elemento 
                     // alla LongListSelector
@@ -100,7 +97,8 @@ namespace AppSDEM
                             immagine = detailpoiList[0].GetUrlThumbImage(),
                             nome = detailpoiList[0].short_description,
                             citta = detailpoiList[0].city,
-                            distanza = distance.ToString()
+                            distanza = distance.ToString(),
+                            posizione = detailpoiList[0].position
                         });
                     }
                     // stoppo e nascondo la progress bar
@@ -114,14 +112,43 @@ namespace AppSDEM
         }
 
         /**
-         * Funzione che al Tap di un elemento della lista ti indirizza alla pagina
-         * <code>DetailPage</code> per visualizzare tutti i dettagli del PoI
-         */ 
+         * Funzione che al Tap di un elemento della lista apre un CMB con possibilità di scelta tra
+         * visualizzare più dettagli o visualizzare il PoI nella mappa
+         */
         private void GetPoiDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             // creo un item che ottiene i dati dell'elemento ottenuto dal tap
             PoIvicini item = ((FrameworkElement)e.OriginalSource).DataContext as PoIvicini;
-            NavigationService.Navigate(new Uri("/DetailPage.xaml?poi_id=" + item.idpoi, UriKind.Relative));
+            // ci entra solo se clicchi sui PoI senza immagine perchè non riesce a creare il data context
+            if (item == null)
+            {
+                MessageBox.Show("Non ci sono ulteriori informazioni per questo PoI");
+                return;
+            }
+            // creo un CutstomMessageBox che appare al Tap per avere più info o visualizzare il PoI sulla mappa
+            CustomMessageBox cmb = new CustomMessageBox()
+            {
+                Caption = item.nome,
+                LeftButtonContent = "More Details",
+                RightButtonContent = "View on Map",
+            };
+            // vengono assegnati 2 metodi diversi in relazione ai 2 bottoni sul CMB
+            cmb.Dismissed += (s1, e1) =>
+            {
+                switch (e1.Result)
+                {
+                    // bottone sinistro -> pagina dei dettagli
+                    case CustomMessageBoxResult.LeftButton:
+                        NavigationService.Navigate(new Uri("/DetailPage.xaml?poi_id=" + item.idpoi, UriKind.Relative));
+                        break;
+                    // bottone destro -> visualizzare il checkin nella mappa
+                    case CustomMessageBoxResult.RightButton:
+                        NavigationService.Navigate(new Uri("/MapPage.xaml?pos=" + item.posizione, UriKind.Relative));
+                        break;
+                }
+            };
+            // mostra il CMB
+            cmb.Show();
         }
     }
 }

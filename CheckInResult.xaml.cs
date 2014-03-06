@@ -45,7 +45,7 @@ namespace AppSDEM
 
                 int userPK = (int)IsolatedStorageSettings.ApplicationSettings["userPK"];
 
-                // Chiamo l'API per visualizzare i checkin per l'utente con ID=9.
+                // Chiamo l'API per visualizzare i checkin dell'utente registrato
                 string json = await WebAPI.get_user_checkin("1", userPK.ToString(), "True");
                 List<CheckIn> checkin = new List<CheckIn>();
                 checkin = Utils.DeserializeJSONArray<CheckIn>(json);
@@ -89,26 +89,29 @@ namespace AppSDEM
             detailpoiList = Utils.DeserializeJSONArray<PoI>(json_detail);
             string poiposition = detailpoiList[0].position;
 
+            // creo un CutstomMessageBox che appare al Tap per avere più info o visualizzare il checkin sulla mappa
             CustomMessageBox cmb = new CustomMessageBox()
             {
                 Caption = item.nome,        
                 LeftButtonContent = "More Details",
                 RightButtonContent = "View on Map",
             };
-
+            // vengono assegnati 2 metodi diversi in relazione ai 2 bottoni sul CMB
             cmb.Dismissed += (s1, e1) =>
                 {
                     switch (e1.Result)
                     {
+                        // bottone sinistro -> pagina dei dettagli
                         case CustomMessageBoxResult.LeftButton:
                             NavigationService.Navigate(new Uri("/DetailPage.xaml?poi_id=" + item.idpoi, UriKind.Relative));
                             break;
+                        // bottone destro -> visualizzare il checkin nella mappa
                         case CustomMessageBoxResult.RightButton:
                             NavigationService.Navigate(new Uri("/MapPage.xaml?pos=" + poiposition, UriKind.Relative));
                             break;
                     }
                 };
-
+            // mostra il CMB
             cmb.Show();
         }
     }

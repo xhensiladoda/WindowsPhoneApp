@@ -40,6 +40,9 @@
                     			<Run Text="{Binding nome}"/>
                     			<Run Text="&#xA;"/>
                     			<Run Text="{Binding citta}"/>
+                                <Run Text="&#xA;a "/>
+                    			<Run Text="{Binding distanza}"/>
+                    			<Run Text=" km"/>
                             </TextBlock>
                         </StackPanel>
                     </DataTemplate>
