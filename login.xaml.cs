@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.IO.IsolatedStorage;
+
 namespace AppSDEM
 {  
     /**
@@ -36,9 +38,23 @@ namespace AppSDEM
             string json = await WebAPI.login("1", username, password);
             List<User> user = new List<User>();
             user = Utils.DeserializeJSONArray<User>(json);
-            if(user[0].pk!=0)
+            if (user[0].pk != 0)
+            {
+                // salvo userPK e userName in cache in modo da ottenerli in avvii successivi
+                if (!IsolatedStorageSettings.ApplicationSettings.Contains("userPK"))
+                {
+                    IsolatedStorageSettings.ApplicationSettings.Add("userPK", user[0].pk);
+                    IsolatedStorageSettings.ApplicationSettings.Add("userName", user[0].fields.first_name);
+                }
+
+                IsolatedStorageSettings.ApplicationSettings["userPK"] = user[0].pk;
+                IsolatedStorageSettings.ApplicationSettings["userName"] = user[0].fields.first_name;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-            else MessageBox.Show("Username o Password errati");
+            }
+            else 
+                MessageBox.Show("Username o Password errati");
         }
     }
 }

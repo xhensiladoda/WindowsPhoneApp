@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AppSDEM.Resources;
+using System.IO.IsolatedStorage;
 
 namespace AppSDEM
 {
@@ -17,6 +18,27 @@ namespace AppSDEM
         public MainPage()
         {
             InitializeComponent();
+
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("userPK"))
+            {
+                int userPK = (int)IsolatedStorageSettings.ApplicationSettings["userPK"];
+                if (userPK == 0)
+                {
+                    loginbutton.Visibility = System.Windows.Visibility.Visible;
+                    logoutbutton.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else
+                {
+                    loginbutton.Visibility = System.Windows.Visibility.Collapsed;
+                    logoutbutton.Visibility = System.Windows.Visibility.Visible;
+                    MessageBox.Show("ciao n." + userPK + " -> " + IsolatedStorageSettings.ApplicationSettings["userName"]);
+                }
+            }
+            else
+            {
+                loginbutton.Visibility = System.Windows.Visibility.Visible;
+            }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,20 +57,29 @@ namespace AppSDEM
             NavigationService.Navigate(new Uri("/camera.xaml", UriKind.Relative));
         }
 
-        // Codice di esempio per la realizzazione di una ApplicationBar localizzata
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Imposta la barra delle applicazioni della pagina su una nuova istanza di ApplicationBar
-        //    ApplicationBar = nuova ApplicationBar();
 
-        //    // Crea un nuovo pulsante e imposta il valore del testo sulla stringa localizzata da AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
+        private void checkinbutton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((!IsolatedStorageSettings.ApplicationSettings.Contains("userPK")) || 
+                (int)IsolatedStorageSettings.ApplicationSettings["userPK"] == 0)
+            {
+                MessageBox.Show("Non puoi visualizzare i Checkin se non sei registrato!");
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("/CheckInResult.xaml", UriKind.Relative));
+            }
+        }
 
-        //    // Crea una nuova voce di menu con la stringa localizzata da AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            IsolatedStorageSettings.ApplicationSettings["userPK"] = 0;
+            IsolatedStorageSettings.ApplicationSettings.Save();
+            MessageBox.Show("Ti sei scollegato!!");
+            loginbutton.Visibility = System.Windows.Visibility.Visible;
+            logoutbutton.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+
     }
 }

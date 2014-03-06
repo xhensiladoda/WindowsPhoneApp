@@ -23,24 +23,28 @@ namespace AppSDEM
     {
         /** URL da cui reperire le immagini */
         const string SERVER_IMAGE_URL = @"http://jupiter.ing.unimo.it/media/";
-        
-        /** Identificatore del POI*/
+
+        /** Identificatore del checkin */
+        [DataMember]
+        public int idcheckin { get; set; }
+
+        /** Identificatore del POI */
         [DataMember]
         public int idpoi { get; set; }
 
-        /** Descrizione*/
+        /** Descrizione */
         [DataMember]
         public string description { get; set; }
 
-        /** Nome*/
+        /** Nome */
         [DataMember]
         public string name { get; set; }
 
-        /** Immagine*/
+        /** Immagine */
         [DataMember]
         public string image { get; set; }
 
-        /** Data*/
+        /** Data */
         [DataMember]
         public DateTime date { get; set; }
 
@@ -55,7 +59,8 @@ namespace AppSDEM
             return url;
         }
 
-        /** Funzione che restituisce l'immagine.
+        /** 
+         * Funzione che restituisce l'immagine.
          */
         public string GetImage()
         {

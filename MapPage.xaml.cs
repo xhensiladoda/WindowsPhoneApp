@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Threading.Tasks;
 using AppSDEM.Resources;
+using System.IO.IsolatedStorage;
+using System.Globalization;
 
 
 
@@ -26,7 +28,6 @@ namespace AppSDEM
      * @author Setti Davide
      */
 
-
     public partial class MapPage : PhoneApplicationPage
     {
         /** Base zomm level. */
@@ -35,7 +36,7 @@ namespace AppSDEM
         GeoCoordinate currentLocation = null;
         /** Layer for display current location on the Map. */
         MapLayer poiLayer = null;
-
+        
         public MapPage()
         {
             InitializeComponent();
@@ -81,7 +82,6 @@ namespace AppSDEM
             marker.GeoCoordinate = currentLocation;
             marker.Visibility = Visibility.Visible;
         }
-
 
         public class PoIonTap {
             public int id { get; set; }
@@ -173,8 +173,18 @@ namespace AppSDEM
                 switch (e1.Result)
                 {
                     case CustomMessageBoxResult.RightButton:
-                        //Se l'utente clicca il righbutton allora invoco la funzione per aggiungere il checkin
-                        addCheckIn("1",Convert.ToString(item.id), "manual", "9");
+
+                        if ((!IsolatedStorageSettings.ApplicationSettings.Contains("userPK")) ||
+                            (int)IsolatedStorageSettings.ApplicationSettings["userPK"] == 0)
+                        {
+                            MessageBox.Show("Non puoi aggiungere un Checkin se non sei registrato!");
+                        }
+                        else
+                        {
+                            int userPK = (int)IsolatedStorageSettings.ApplicationSettings["userPK"];
+                            //Se l'utente clicca il righbutton allora invoco la funzione per aggiungere il checkin
+                            addCheckIn("1", item.id.ToString(), "manual", userPK.ToString());
+                        }
                         break;
                 }
             };
@@ -280,5 +290,31 @@ namespace AppSDEM
             nearbyBarMenuItem.Click += GetNearby;
             ApplicationBar.MenuItems.Add(nearbyBarMenuItem);
         }
+
+        /**
+         * Funzione che serve per centrare la mappa su una posizione nota diversa dalla currentLocation
+         * Serve per visualizzare la posizione di un PoI sulla mappa quando viene selezionato da una lista
+         */ 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            string pos = e.Uri.ToString();
+            string mappage = "/MapPage.xaml";
+
+            // se nell'Uri non c'è una posizione vuol dire che l'utente ha chiamato la mappa dalla pagina principale
+            // quindi non mi serve forzare la posizione ma lascio il default currentLocation
+            if (!pos.Equals(mappage))
+            {
+                // estraggo le coordinate che sono state passate
+                pos = NavigationContext.QueryString["pos"];
+                string[] coordinate = pos.Split(new char[] { ',' });
+                double latitude = double.Parse(coordinate[0], CultureInfo.InvariantCulture);
+                double longitude = double.Parse(coordinate[1], CultureInfo.InvariantCulture);
+                // centro la mappa sulla posizione voluta e aumento lo zoom
+                poiMap.Center = new GeoCoordinate(latitude, longitude);
+                poiMap.ZoomLevel = 17;
+            }
+        }
+
     }
 }

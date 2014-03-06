@@ -27,28 +27,28 @@
 
         <!--ContentPanel - inserire ulteriore contenuto qui-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector Name="poivicini" IsGroupingEnabled="False" HorizontalAlignment="Left" Height="634" VerticalAlignment="Top" Width="456" Tap="GetPoiDetail_Tap">
+            <ProgressBar Name="progressbar" HorizontalAlignment="Left" Height="38" Margin="82,200,0,0" VerticalAlignment="Top" Width="302"/>
+            <TextBlock Name="notfound_txt" FontSize="25" HorizontalAlignment="Left" Margin="22,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="130" Width="410"/>
+            <phone:LongListSelector x:Name="poivicini" IsGroupingEnabled="False" HorizontalAlignment="Left" Height="634" VerticalAlignment="Top" Width="456" Tap="GetPoiDetail_Tap">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <Border Width="130" Height="100" Margin="35,0,10,0">
-                                <Image Name="imm" Source="{Binding immagine}" HorizontalAlignment="Left" Height="100" Margin="10,24,0,0" VerticalAlignment="Top" Width="100"/>
+                                <Image x:Name="imm" Source="{Binding immagine}" HorizontalAlignment="Left" Height="100" Margin="10,24,0,0" VerticalAlignment="Top" Width="100"/>
                             </Border>
                             <TextBlock FontSize="20" VerticalAlignment="Center">
-                                <Run Text="{Binding nome}"></Run>
-                                <Run Text="&#13;"></Run>
-                                <Run Text="{Binding citta}"></Run>
-                                <Run Text="&#13;"></Run>
-                                <Run Text="a "></Run>
-                                <Run Text="{Binding distanza}"></Run>
-                                <Run Text=" km"></Run>
+                    			<Run Text="{Binding nome}"/>
+                    			<Run Text="&#xA;"/>
+                    			<Run Text="{Binding citta}"/>
+                    			<Run Text="&#xA;"/>
+                    			<Run Text="a "/>
+                    			<Run Text="{Binding distanza}"/>
+                    			<Run Text=" km"/>
                             </TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
             </phone:LongListSelector>
-            <ProgressBar Name="progressbar" HorizontalAlignment="Left" Height="38" Margin="82,200,0,0" VerticalAlignment="Top" Width="302"/>
-            <TextBlock Name="notfound_txt" FontSize="25" HorizontalAlignment="Left" Margin="22,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="130" Width="410"/>
 
         </Grid>
     </Grid>
