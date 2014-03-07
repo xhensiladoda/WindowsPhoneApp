@@ -26,8 +26,8 @@ namespace AppSDEM
             //recupero i dati dai textbox
             TextBox user_t = (TextBox)user;
             String username = user_t.Text;
-            TextBox password_t = (TextBox)pass;
-            String password = password_t.Text;
+            PasswordBox password_t = (PasswordBox)pass;
+            String password = password_t.Password;
             GetId(username, password);
         }
         /**

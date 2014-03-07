@@ -228,7 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="camera.png" />
-    <Resource Include="loginicon.png" />
     <Resource Include="niepce_s_camera_obscura_iphoto.png" />
     <Resource Include="recherche_internet.png" />
     <Resource Include="wood-map-icon.png" />
