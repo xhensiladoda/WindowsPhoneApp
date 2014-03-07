@@ -121,9 +121,6 @@
     <Compile Include="PoISearchResultsPage.xaml.cs">
       <DependentUpon>PoISearchResultsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -183,10 +180,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Test.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -235,7 +228,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="camera.png" />
-    <Resource Include="lock_open.jpeg" />
+    <Resource Include="loginicon.png" />
     <Resource Include="niepce_s_camera_obscura_iphoto.png" />
     <Resource Include="recherche_internet.png" />
     <Resource Include="wood-map-icon.png" />
