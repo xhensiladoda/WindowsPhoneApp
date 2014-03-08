@@ -17,6 +17,7 @@ namespace AppSDEM
      * @author Xhensila Doda
      */
 
+    //Struct che serve per la rappresentazione dei checkin
     public class CheckInDisponibili
     {
         // public string descrizione { get; set; }
@@ -49,6 +50,8 @@ namespace AppSDEM
                 string json = await WebAPI.get_user_checkin("1", userPK.ToString(), "True");
                 List<CheckIn> checkin = new List<CheckIn>();
                 checkin = Utils.DeserializeJSONArray<CheckIn>(json);
+
+                //Se non ci sono checkin per quest'utente visualizzo un messaggio
                 if (checkin.Count == 0)
                 {
                     notfound_txt.Text = "Nessun CheckIn disponibile per questo utente!";
@@ -57,9 +60,12 @@ namespace AppSDEM
                     progressbar.Visibility = Visibility.Collapsed;
 
                 }
-                else
-                {   // Salvo i dettagli che andrò a visualizzare.
+                else //altrimenti
+                {   
+                    // salvo i dettagli che andrò a visualizzare.
                     ObservableCollection<CheckInDisponibili> checkin_trovati= new ObservableCollection<CheckInDisponibili>();
+                    
+                    //Salvo i dati nella struct per la visualizzazione.
                     for (int i = 0; i < checkin.Count; i++)
                     {
                         checkin_trovati.Add(new CheckInDisponibili
@@ -81,22 +87,23 @@ namespace AppSDEM
 
         private async void listacheckin_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // creo un item che ottiene i dati dell'elemento ottenuto dal tap
+            // Creo un item che ottiene i dati dell'elemento ottenuto dal tap
             CheckInDisponibili item = ((FrameworkElement)e.OriginalSource).DataContext as CheckInDisponibili;
-            // faccio un poi_details per estrarre la posizione del checkin
+            
+            // Faccio un poi_details per estrarre la posizione del checkin
             string json_detail = await WebAPI.poi_details("1", item.idpoi);
             List<PoI> detailpoiList = new List<PoI>();
             detailpoiList = Utils.DeserializeJSONArray<PoI>(json_detail);
             string poiposition = detailpoiList[0].position;
 
-            // creo un CutstomMessageBox che appare al Tap per avere più info o visualizzare il checkin sulla mappa
+            // Creo un CutstomMessageBox che appare al Tap per avere più info o visualizzare il checkin sulla mappa
             CustomMessageBox cmb = new CustomMessageBox()
             {
                 Caption = item.nome,        
                 LeftButtonContent = "More Details",
                 RightButtonContent = "View on Map",
             };
-            // vengono assegnati 2 metodi diversi in relazione ai 2 bottoni sul CMB
+            // Vengono assegnati 2 metodi diversi in relazione ai 2 bottoni sul CMB
             cmb.Dismissed += (s1, e1) =>
                 {
                     switch (e1.Result)
