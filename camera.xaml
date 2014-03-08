@@ -9,40 +9,14 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Landscape" Orientation="LandscapeLeft"
+    SupportedOrientations="Portrait" Orientation="PortraitUp"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot è la griglia radice in cui viene inserito tutto il contenuto della pagina-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="800"/>
-        </Grid.RowDefinitions>
-        <Canvas x:Name="viewfinderCanvas" Width="800" 
-                   HorizontalAlignment="Left" Margin="0,0,0,320" >
-
-            <!--Fotocamera viewfinder -->
-            <Canvas.Background>
-                <VideoBrush x:Name="viewfinderBrush" />
-            </Canvas.Background>
-        </Canvas>
-        <!--Button StackPanel in fondo al viewfinder>-->
-        <StackPanel Margin="556.773,195.504,-159.023,524.437" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" >
-        	<StackPanel.RenderTransform>
-        		<CompositeTransform Rotation="-88.808"/>
-        	</StackPanel.RenderTransform>
-            <Button x:Name="ShutterButton" Content="" Click="ShutterButton_Click" FontSize="26" FontWeight="ExtraBold" Height="117.974" Margin="148.514,0,126.538,0" RenderTransformOrigin="0.529,0.488" UseLayoutRounding="False" d:LayoutRounding="Auto" Foreground="Black" BorderBrush="{x:Null}" >
-            	<Button.Background>
-            		<ImageBrush Stretch="Fill" ImageSource="camera.png"/>
-            	</Button.Background>
-            	<Button.RenderTransform>
-            		<CompositeTransform Rotation="0.075" SkewX="0.669" TranslateX="4.057" TranslateY="-2.95" SkewY="-0.681"/>
-            	</Button.RenderTransform>
-            </Button>
-        </StackPanel>
-
-        <!--Utile per il debugging, per il momento non usato >-->
-        <TextBlock Height="40" HorizontalAlignment="Left" Margin="8,428,0,0" Name="txtDebug" VerticalAlignment="Top" Width="626" FontSize="24" FontWeight="ExtraBold" />
+        <Button Content="Accesso Fotocamera" Height="72" HorizontalAlignment="Left" Margin="36,90,0,0" Name="camera_button" VerticalAlignment="Top" Width="389" Click="camera_button_click" Background="#BFE4CC79" />
+        <Image Height="435" HorizontalAlignment="Left" Margin="36,244,0,0" Name="captured_image" Stretch="Fill" VerticalAlignment="Top" Width="389" />
     </Grid>
 
 </phone:PhoneApplicationPage>
