@@ -85,6 +85,9 @@ namespace AppSDEM
             }
         }
 
+        /**  
+         * Funzione che visualizza la lista i dettagli dei checkin oppure la sua posizione nella mappa geografica.
+         */
         private async void listacheckin_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             // Creo un item che ottiene i dati dell'elemento ottenuto dal tap
@@ -92,9 +95,9 @@ namespace AppSDEM
             
             // Faccio un poi_details per estrarre la posizione del checkin
             string json_detail = await WebAPI.poi_details("1", item.idpoi);
-            List<PoI> detailpoiList = new List<PoI>();
-            detailpoiList = Utils.DeserializeJSONArray<PoI>(json_detail);
-            string poiposition = detailpoiList[0].position;
+            List<PoI> detail_checkin_List = new List<PoI>();
+            detail_checkin_List = Utils.DeserializeJSONArray<PoI>(json_detail);
+            string checkin_position = detail_checkin_List[0].position;
 
             // Creo un CutstomMessageBox che appare al Tap per avere più info o visualizzare il checkin sulla mappa
             CustomMessageBox cmb = new CustomMessageBox()
@@ -114,7 +117,7 @@ namespace AppSDEM
                             break;
                         // bottone destro -> visualizzare il checkin nella mappa
                         case CustomMessageBoxResult.RightButton:
-                            NavigationService.Navigate(new Uri("/MapPage.xaml?pos=" + poiposition, UriKind.Relative));
+                            NavigationService.Navigate(new Uri("/MapPage.xaml?pos=" + checkin_position, UriKind.Relative));
                             break;
                     }
                 };
