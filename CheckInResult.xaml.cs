@@ -86,7 +86,7 @@ namespace AppSDEM
         }
 
         /**  
-         * Funzione che visualizza la lista i dettagli dei checkin oppure la sua posizione nella mappa geografica.
+         * Funzione che visualizza la lista dei dettagli del checkin oppure la sua posizione nella mappa geografica.
          */
         private async void listacheckin_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
