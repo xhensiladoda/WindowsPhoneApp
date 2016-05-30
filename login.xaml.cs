@@ -13,7 +13,7 @@ namespace AppSDEM
 {  
     /**
     * Controller responsabile del login.
-    * @author Doda Xhensila e Chiara Ferrari
+    * @author Doda Xhensila
     */
     public partial class login : PhoneApplicationPage
     {
