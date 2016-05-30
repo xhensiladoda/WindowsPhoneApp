@@ -14,7 +14,7 @@ namespace AppSDEM
 {   
     /**
     * Controller responsabile per l'accesso alla fotocamera.
-    * @author Doda Xhensila e Chiara Ferrari
+    * @author Doda Xhensila
     */
     public partial class camera : PhoneApplicationPage
     {
